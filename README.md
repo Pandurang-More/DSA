@@ -21,12 +21,6 @@ I’ll be solving problems in C++ while focusing on improving problem-solving sk
 
 ---
 
-## 🏆 Progress Tracker
-
-| Date       | Topic   | Problem                       | Status   |
-|------------|---------|-------------------------------|----------|
-| 2025-08-12 | Array   | Largest Element in Array       | ✅ Done  |
-| YYYY-MM-DD | String  | Reverse a String               | ⏳ In Progress |
 
 ---
 
