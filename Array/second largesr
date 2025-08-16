@@ -1,0 +1,50 @@
+# Brute force
+first sort the array it takes O(nlogn)
+then 
+arr[n-1] contain the largest element.
+int slargest;
+for(int i=n-2;i>0;i++)
+ {
+if (arr[i]!=largest)
+  {
+slargest=arr[i];
+break;
+  }
+ }
+time complexity: nlogn+n;
+
+# Better
+int largest=arr[0];
+for(int i=0;i<n;i++)
+ {
+  if(arr[i]>largest)
+  largest=arr[i];
+ }
+ slargest=-1;
+ for(int i=0;i<n;i++)
+ {
+   if(arr[i]>largest && arr[i]!=largest)
+   slargest=arr[i];
+ }
+
+ time complexity : O(n+n)=O(2n)
+
+ #optimize
+ int getSecondLargest(int *arr, int n) 
+  {
+    int slargest=-1;
+    int largest=arr[0];
+    for(int i=1;i<n;i++)
+     {
+        if(arr[i]>largest)
+        {
+            slargest=largest;
+            largest=arr[i];
+        }
+        else if (arr[i]<largest && arr[i]>slargest)
+        slargest=arr[i];
+    }
+    return slargest;
+}
+
+time complexity : O(n)
