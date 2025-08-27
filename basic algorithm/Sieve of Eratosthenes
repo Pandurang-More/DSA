@@ -44,3 +44,7 @@ Repeat the process for all numbers up to √100.
 Finally, print all numbers that are still marked true → these are the prime numbers.
 
 Time Complexity:The sieve runs in O(N log log N), which is much faster than checking each number individually.
+
+for prime harmonic seris(1/2 + 1/3 + ..) it converge loglogn + c 
+where C is Mertens’ constant (~0.261).
+Total Work ≈ n * log(log n)
