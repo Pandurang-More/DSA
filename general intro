@@ -1,7 +1,17 @@
+# Top 15 Array Interview Questions
 
-| Priority Level | Topics                                                                               | Comments                                                                                     |
-|----------------|--------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| High           | Arrays, Strings, Sorting and Searching, Trees (Binary Trees, Binary Search Trees), Graphs, Matrices | Fundamental and frequent topics in most coding interviews                                   |
-| Medium-High    | Hash Tables, Linked Lists, Queues, Stacks, Heaps, Tries, Interval Problems          | Frequently asked, important for various problem types                                       |
-| Medium         | Recursion, Dynamic Programming, Binary Operations, Geometry Problems                | More complex problem-solving, often asked in later rounds or advanced roles                 |
-| Low            | Mathematical Algorithms, Advanced Graph Algorithms (e.g., Network Flows), Specialized Topics | Usually less frequent, specialized knowledge beneficial for higher level or niche roles     |
+1. Two Sum
+2. Maximum Subarray (Kadane’s Algorithm)
+3. Merge Intervals
+4. Rotate Array
+5. Trapping Rain Water
+6. Contains Duplicate
+7. Product of Array Except Self
+8. Maximum Product Subarray
+9. Move Zeroes
+10. Find Missing Number
+11. Find All Numbers Disappeared in an Array
+12. Top K Frequent Elements
+13. Longest Consecutive Sequence
+14. Find Peak Element
+15. Search in Rotated Sorted Array
