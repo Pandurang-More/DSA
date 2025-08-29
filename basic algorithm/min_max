@@ -48,28 +48,34 @@ time complexity: 3n/2 comparision.
 #include <vector>
 using namespace std;
 
-int main() {
+int main()
+  {
     int n;
     cout << "Enter number of elements: ";
     cin >> n;
 
-    if (n <= 0) {
+    if (n <= 0) 
+   {
         cout << "Array size must be positive!" << endl;
         return 0;
     }
 
     vector<int> arr(n);
     cout << "Enter " << n << " elements:" << endl;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) 
+    {
         cin >> arr[i];
     }
 
     int max, min;
 
     // Handle base cases
-    if (n == 1) {
+    if (n == 1) 
+    {
         max = min = arr[0];
-    } else {
+    }
+    else 
+      {
         // Initialize first two elements
         if (arr[0] > arr[1]) {
             max = arr[0];
@@ -80,18 +86,25 @@ int main() {
         }
 
         // Compare elements in pairs starting from index 2
-        for (int i = 2; i < n; i += 2) {
+        for (int i = 2; i < n; i += 2)
+     {
             int local_max, local_min;
 
-            if (i + 1 < n) {  // Pair exists
-                if (arr[i] > arr[i + 1]) {
+            if (i + 1 < n) 
+            {  // Pair exists
+                if (arr[i] > arr[i + 1])
+                 {
                     local_max = arr[i];
                     local_min = arr[i + 1];
-                } else {
+                } 
+                else 
+                {
                     local_max = arr[i + 1];
                     local_min = arr[i];
                 }
-            } else {
+            } 
+        else 
+            {
                 // Only one element left
                 local_max = local_min = arr[i];
             }
