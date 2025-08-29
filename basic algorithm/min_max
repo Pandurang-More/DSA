@@ -1,1 +1,109 @@
+# one loop version
+time complexity : 2n-1 comparision
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter number of elements: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Array size must be positive!" << endl;
+        return 0;
+    }
+
+    vector<int> arr(n);
+    cout << "Enter " << n << " elements:" << endl;
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    int max = arr[0];
+    int min = arr[0];
+
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > max)
+            max = arr[i];
+        if (arr[i] < min)
+            min = arr[i];
+    }
+
+    cout << "Max element: " << max << endl;
+    cout << "Min element: " << min << endl;
+
+    return 0;
+}
+
+
+
+
+tournament method: pairwise comparision, efficent algo
+time complexity: 3n/2 comparision.
+
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter number of elements: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Array size must be positive!" << endl;
+        return 0;
+    }
+
+    vector<int> arr(n);
+    cout << "Enter " << n << " elements:" << endl;
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    int max, min;
+
+    // Handle base cases
+    if (n == 1) {
+        max = min = arr[0];
+    } else {
+        // Initialize first two elements
+        if (arr[0] > arr[1]) {
+            max = arr[0];
+            min = arr[1];
+        } else {
+            max = arr[1];
+            min = arr[0];
+        }
+
+        // Compare elements in pairs starting from index 2
+        for (int i = 2; i < n; i += 2) {
+            int local_max, local_min;
+
+            if (i + 1 < n) {  // Pair exists
+                if (arr[i] > arr[i + 1]) {
+                    local_max = arr[i];
+                    local_min = arr[i + 1];
+                } else {
+                    local_max = arr[i + 1];
+                    local_min = arr[i];
+                }
+            } else {
+                // Only one element left
+                local_max = local_min = arr[i];
+            }
+
+            if (local_max > max) max = local_max;
+            if (local_min < min) min = local_min;
+        }
+    }
+
+    cout << "Max element: " << max << endl;
+    cout << "Min element: " << min << endl;
+
+    return 0;
+}
 
