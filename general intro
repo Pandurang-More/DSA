@@ -15,3 +15,76 @@
 13. Longest Consecutive Sequence
 14. Find Peak Element
 15. Search in Rotated Sorted Array
+
+| S.No | Problem Name                            | Topic  |
+|-------|---------------------------------------|--------|
+| 1     | Two Sum                               | Array  |
+| 2     | Best Time to Buy and Sell Stock       | Array  |
+| 3     | Maximum Subarray (Kadane's Algorithm) | Array  |
+| 4     | Maximum Product Subarray               | Array  |
+| 5     | Merge Intervals                       | Array  |
+| 6     | Insert Interval                      | Array  |
+| 7     | Rotate Array                         | Array  |
+| 8     | Move Zeroes                         | Array  |
+| 9     | Contains Duplicate                   | Array  |
+| 10    | Product of Array Except Self         | Array  |
+| 11    | Set Matrix Zeroes                   | Array  |
+| 12    | Spiral Matrix                      | Array  |
+| 13    | Longest Substring Without Repeating Characters | String |
+| 14    | Valid Palindrome                    | String |
+| 15    | Reverse String                     | String |
+| 16    | Valid Anagram                      | String |
+| 17    | Longest Palindromic Substring       | String |
+| 18    | Palindromic Substrings              | String |
+| 19    | Group Anagrams                     | String |
+| 20    | Count and Say                     | String |
+| 21    | Minimum Window Substring             | String |
+| 22    | Word Pattern                    | String |
+| 23    | Reverse Words in a String             | String |
+| 24    | Longest Common Prefix              | String |
+| 25    | Implement strstr() (Substring Search)     | String |
+| 26    | Length of Last Word                | String |
+| 27    | Valid Parentheses                 | String |
+| 28    | Next Permutation                 | Array  |
+| 29    | Majority Element                 | Array  |
+| 30    | Majority Element II                | Array  |
+| 31    | Find All Numbers Disappeared in an Array    | Array  |
+| 32    | Find Peak Element                 | Array  |
+| 33    | Search in Rotated Sorted Array        | Array  |
+| 34    | Intersection of Two Arrays II       | Array  |
+| 35    | 3Sum                           | Array  |
+| 36    | 4Sum                           | Array  |
+| 37    | Subarray Sum Equals K              | Array  |
+| 38    | Maximum Consecutive Ones                | Array  |
+| 39    | Longest Consecutive Sequence          | Array  |
+| 40    | Merge Sorted Array                | Array  |
+| 41    | Find Minimum in Rotated Sorted Array      | Array  |
+| 42    | Find Minimum in Rotated Sorted Array II   | Array  |
+| 43    | Count Primes                    | Array  |
+| 44    | Reverse Vowels of a String             | String |
+| 45    | Reverse Words in a String II          | String |
+| 46    | String Compression                | String |
+| 47    | Longest Repeating Character Replacement | String |
+| 48    | Sliding Window Maximum            | Array  |
+| 49    | Trapping Rain Water                  | Array  |
+| 50    | Maximum Width Ramp               | Array  |
+| 51    | Pascal’s Triangle                | Array  |
+| 52    | Wiggle Sort                     | Array  |
+| 53    | Game of Life                   | Array  |
+| 54    | Flatten 2D Vector               | Array  |
+| 55    | Find All Duplicates            | Array  |
+| 56    | Find Duplicate Number             | Array  |
+| 57    | Encode and Decode Strings          | String |
+| 58    | Implement Atoi                   | String |
+| 59    | Multiply Strings                | String |
+| 60    | Integer to Roman               | String |
+| 61    | Roman to Integer               | String |
+| 62    | Valid Number                   | String |
+| 63    | License Key Formatting           | String |
+| 64    | Reverse String II              | String |
+| 65    | Bulb Switcher                 | Array  |
+| 66    | Partition Labels               | String |
+| 67    | Valid Palindrome II             | String |
+| 68    | Redundant Connection          | Array  |
+| 69    | All Anagrams in a String          | String |
+| 70    | Next Smallest Palindrome          | String |
