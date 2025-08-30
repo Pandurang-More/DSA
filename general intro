@@ -1,21 +1,4 @@
-# Top 15 Array Interview Questions
-
-1. Two Sum
-2. Maximum Subarray (Kadane’s Algorithm)
-3. Merge Intervals
-4. Rotate Array
-5. Trapping Rain Water
-6. Contains Duplicate
-7. Product of Array Except Self
-8. Maximum Product Subarray
-9. Move Zeroes
-10. Find Missing Number
-11. Find All Numbers Disappeared in an Array
-12. Top K Frequent Elements
-13. Longest Consecutive Sequence
-14. Find Peak Element
-15. Search in Rotated Sorted Array
-
+### Array Problems  
 1. Two Sum  
 2. Best Time to Buy and Sell Stock  
 3. Maximum Subarray (Kadane's Algorithm)  
@@ -28,61 +11,68 @@
 10. Product of Array Except Self  
 11. Set Matrix Zeroes  
 12. Spiral Matrix  
-13. Longest Substring Without Repeating Characters  
-14. Valid Palindrome  
-15. Reverse String  
-16. Valid Anagram  
-17. Longest Palindromic Substring  
-18. Palindromic Substrings  
-19. Group Anagrams  
-20. Count and Say  
-21. Minimum Window Substring  
-22. Word Pattern  
-23. Reverse Words in a String  
-24. Longest Common Prefix  
-25. Implement strstr() (Substring Search)  
-26. Length of Last Word  
-27. Valid Parentheses  
-28. Next Permutation  
-29. Majority Element  
-30. Majority Element II  
-31. Find All Numbers Disappeared in an Array  
-32. Find Peak Element  
-33. Search in Rotated Sorted Array  
-34. Intersection of Two Arrays II  
-35. 3Sum  
-36. 4Sum  
-37. Subarray Sum Equals K  
-38. Maximum Consecutive Ones  
-39. Longest Consecutive Sequence  
-40. Merge Sorted Array  
-41. Find Minimum in Rotated Sorted Array  
-42. Find Minimum in Rotated Sorted Array II  
-43. Count Primes  
-44. Reverse Vowels of a String  
-45. Reverse Words in a String II  
-46. String Compression  
-47. Longest Repeating Character Replacement  
-48. Sliding Window Maximum  
-49. Trapping Rain Water  
-50. Maximum Width Ramp  
-51. Pascal’s Triangle  
-52. Wiggle Sort  
-53. Game of Life  
-54. Flatten 2D Vector  
-55. Find All Duplicates  
-56. Find Duplicate Number  
-57. Encode and Decode Strings  
-58. Implement Atoi  
-59. Multiply Strings  
-60. Integer to Roman  
-61. Roman to Integer  
-62. Valid Number  
-63. License Key Formatting  
-64. Reverse String II  
-65. Bulb Switcher  
-66. Partition Labels  
-67. Valid Palindrome II  
-68. Redundant Connection  
-69. All Anagrams in a String  
-70. Next Smallest Palindrome  
+13. Next Permutation  
+14. Majority Element  
+15. Majority Element II  
+16. Find All Numbers Disappeared in an Array  
+17. Find Peak Element  
+18. Search in Rotated Sorted Array  
+19. Intersection of Two Arrays II  
+20. 3Sum  
+21. 4Sum  
+22. Subarray Sum Equals K  
+23. Maximum Consecutive Ones  
+24. Longest Consecutive Sequence  
+25. Merge Sorted Array  
+26. Find Minimum in Rotated Sorted Array  
+27. Find Minimum in Rotated Sorted Array II  
+28. Count Primes  
+29. Sliding Window Maximum  
+30. Trapping Rain Water  
+31. Maximum Width Ramp  
+32. Pascal’s Triangle  
+33. Wiggle Sort  
+34. Game of Life  
+35. Flatten 2D Vector  
+36. Find All Duplicates  
+37. Find Duplicate Number  
+38. Bulb Switcher  
+39. Redundant Connection  
+40. Next Smallest Palindrome  
+
+### Sliding Window Problems  
+41. Maximum Sum Subarray of Size K  
+42. Longest Substring Without Repeating Characters  
+43. Minimum Window Substring  
+44. Find All Anagrams in a String  
+45. Longest Repeating Character Replacement  
+46. Fruits into Baskets (Longest Substring with Two Distinct Characters)  
+47. Permutation in String  
+48. Minimum Size Subarray Sum  
+49. Subarrays with K Different Integers  
+50. Sliding Window Maximum  
+
+### String Problems  
+51. Valid Palindrome  
+52. Reverse String  
+53. Valid Anagram  
+54. Longest Palindromic Substring  
+55. Palindromic Substrings  
+56. Group Anagrams  
+57. Count and Say  
+58. Word Pattern  
+59. Reverse Words in a String  
+60. Longest Common Prefix  
+61. Implement strstr() (Substring Search)  
+62. Length of Last Word  
+63. Valid Parentheses  
+64. Reverse Vowels of a String  
+65. Reverse Words in a String II  
+66. String Compression  
+67. Encode and Decode Strings  
+68. Implement Atoi  
+69. Multiply Strings  
+70. Integer to Roman  
+
+
+
