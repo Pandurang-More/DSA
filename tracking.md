@@ -9,7 +9,7 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 ➡️ Start here (easiest, very common in product-based interviews).  
 
 **Array**  
-- [ ] 1. Two Sum (sorted version = classic 2 pointers)  
+- [x] 1. Two Sum (sorted version = classic 2 pointers)  
 - [ ] 2. 3Sum  
 - [ ] 3. 4Sum  
 - [ ] 4. Move Zeroes  
