@@ -48,7 +48,7 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 ➡️ Subarray sum, running sums, and prefix-based questions.  
 
 **Array**  
-- [ ] 22. Maximum Subarray (Kadane’s Algorithm)  
+- [x] 22. Maximum Subarray (Kadane’s Algorithm)  
 - [ ] 23. Maximum Product Subarray  
 - [ ] 24. Subarray Sum Equals K  
 - [ ] 25. Product of Array Except Self  
@@ -67,7 +67,7 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 ## 5. Greedy / Rotation  
 ➡️ Problems involving rearrangement or greedy approaches.  
 
-- [ ] 29. Best Time to Buy and Sell Stock  
+- [x] 29. Best Time to Buy and Sell Stock  
 - [ ] 30. Rotate Array  
 - [ ] 31. Next Permutation  
 - [ ] 32. Wiggle Sort  
