@@ -1,0 +1,35 @@
+1. Division-based Euclidean Algorithm ✅ (fast, standard)
+
+int gcd_division(int a, int b) {
+    a = abs(a); b = abs(b);
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+2. Subtraction-based Euclidean Algorithm
+int gcd_subtraction(int a, int b) {
+    a = abs(a); b = abs(b);
+    if (a == 0) return b;
+    if (b == 0) return a;
+    while (a != b) {
+        if (a > b) a -= b;
+        else b -= a;
+    }
+    return a;
+}
+
+
+
+
+## GCD Algorithm Comparison
+
+| Method                          | Time Complexity            | Practical Use |
+|---------------------------------|----------------------------|---------------|
+| **Division-based Euclid**       | `O(log(min(a,b)))`         | ✅ Standard, very fast |
+| **Subtraction Euclid**          | `O(max(a,b))` (worst-case) | ❌ Too slow for large inputs |
+| **Binary GCD (Stein’s)**        | `O(log(min(a,b)))`         | ✅ Often faster (uses bit shifts) |
+
