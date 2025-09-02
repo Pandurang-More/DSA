@@ -1,0 +1,48 @@
+# brute force
+time complexity:O(n)
+space complexity:O(n)
+
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums)
+{        vector<int>temp;               // using extra temp array
+        int n=nums.size();
+       for(int i=0;i<n;i++)
+      {
+         if(nums[i]!=0)
+         temp.push_back(nums[i]);
+      }
+     int nz=temp.size();
+     for(int i=0;i<nz;i++)
+     {
+         nums[i]=temp[i];
+     }
+     for(int i=nz;i<n;i++)
+      {
+          nums[i]=0;
+      }
+};
+
+
+#optimized 
+
+two pointer 
+time:O(n)
+space:O(1)
+
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int n=nums.size();
+        int j=0;
+        for(int i=0;i<n;i++)
+        { 
+            if(nums[i]!=0){
+            swap(nums[i],nums[j]);  // j is dealing with zero while i is dealing with nonzero
+            j++;
+            }
+
+        }
+        
+    }
+};
