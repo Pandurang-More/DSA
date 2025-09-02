@@ -12,7 +12,7 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 - [x] 1. Two Sum (sorted version = classic 2 pointers)  
 - [x] 2. 3Sum  
 - [x] 3. 4Sum  
-- [ ] 4. Move Zeroes  
+- [x] 4. Move Zeroes  
 - [ ] 5. Merge Sorted Array  
 - [x] 6. Trapping Rain Water  
 - [ ] 7. Maximum Width Ramp  
