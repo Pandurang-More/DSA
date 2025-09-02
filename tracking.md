@@ -10,11 +10,11 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 
 **Array**  
 - [x] 1. Two Sum (sorted version = classic 2 pointers)  
-- [ ] 2. 3Sum  
-- [ ] 3. 4Sum  
+- [x] 2. 3Sum  
+- [x] 3. 4Sum  
 - [ ] 4. Move Zeroes  
 - [ ] 5. Merge Sorted Array  
-- [ ] 6. Trapping Rain Water  
+- [x] 6. Trapping Rain Water  
 - [ ] 7. Maximum Width Ramp  
 
 **String**  
