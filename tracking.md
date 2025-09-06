@@ -13,14 +13,14 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 - [x] 2. 3Sum  
 - [x] 3. 4Sum  
 - [x] 4. Move Zeroes  
-- [ ] 5. Merge Sorted Array  
+- [x] 5. Merge Sorted Array  
 - [x] 6. Trapping Rain Water  
 - [ ] 7. Maximum Width Ramp  
 
 **String**  
 - [x] 8. Valid Palindrome  
-- [ ] 9. Reverse String  
-- [ ] 10. Reverse Vowels of a String  
+- [x] 9. Reverse String  
+- [x] 10. Reverse Vowels of a String  
 - [ ] 11. Reverse Words in a String II  
 
 ---
