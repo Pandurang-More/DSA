@@ -18,7 +18,7 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 - [ ] 7. Maximum Width Ramp  
 
 **String**  
-- [ ] 8. Valid Palindrome  
+- [x] 8. Valid Palindrome  
 - [ ] 9. Reverse String  
 - [ ] 10. Reverse Vowels of a String  
 - [ ] 11. Reverse Words in a String II  
