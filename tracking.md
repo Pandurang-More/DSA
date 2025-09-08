@@ -29,7 +29,7 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 ➡️ Second step, very powerful for subarray/substring problems.  
 
 **Array**  
-- [ ] 12. Maximum Consecutive Ones  
+- [x] 12. Maximum Consecutive Ones  
 - [ ] 13. Sliding Window Maximum  
 
 **String**  
