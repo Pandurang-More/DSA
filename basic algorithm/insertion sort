@@ -1,0 +1,22 @@
+inaertion sort: placed the element at it correct position in each iteration.
+avg , worst casr=O(n*n)
+best=)(n)
+
+
+class Solution {
+  public:
+    void insertionSort(vector<int>& arr) {
+        
+        int n=arr.size();
+        for(int i=1;i<n;i++)  // goes till the last element.
+        {
+            for(int j=i;j>0;j--)  // go and compaare like 0-1.0-2,0-3,0-4   
+            {
+                if(arr[j]<arr[j-1]) // if condition true swap otherwose break; 
+                swap(arr[j],arr[j-1]);
+                else
+                break;
+            }
+        }
+    }
+};
