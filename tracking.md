@@ -33,13 +33,13 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 - [ ] 13. Sliding Window Maximum  
 
 **String**  
-- [ ] 14. Longest Substring Without Repeating Characters  
+- [x] 14. Longest Substring Without Repeating Characters  
 - [ ] 15. Minimum Window Substring  
 - [ ] 16. Find All Anagrams in a String  
 - [ ] 17. Longest Repeating Character Replacement  
 - [ ] 18. Fruits into Baskets (Longest Substring with Two Distinct Characters)  
 - [ ] 19. Permutation in String  
-- [ ] 20. Minimum Size Subarray Sum  
+- [x] 20. Minimum Size Subarray Sum  
 - [ ] 21. Subarrays with K Different Integers  
 
 ---
