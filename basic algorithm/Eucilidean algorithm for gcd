@@ -1,11 +1,11 @@
 1. Division-based Euclidean Algorithm ✅ (fast, standard)
 
-int gcd_division(int a, int b) {
+int gcd_division(int a, int b) {   (20,12)=>(12,8)=>(8,4)=>(4,0)=> return 4
     a = abs(a); b = abs(b);
-    while (b != 0) {
-        int temp = b;
-        b = a % b;
-        a = temp;
+    while (b != 0) {                
+        int rem = a%b;
+        a=b;
+       b=rem;
     }
     return a;
 }
