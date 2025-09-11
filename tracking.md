@@ -34,7 +34,7 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 
 **String**  
 - [x] 14. Longest Substring Without Repeating Characters  
-- [ ] 15. Minimum Window Substring  
+- [x] 15. Minimum Window Substring  
 - [ ] 16. Find All Anagrams in a String  
 - [ ] 17. Longest Repeating Character Replacement  
 - [ ] 18. Fruits into Baskets (Longest Substring with Two Distinct Characters)  
