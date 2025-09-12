@@ -1,0 +1,111 @@
+Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+
+ 
+
+Example 1:
+
+Input: strs = ["eat","tea","tan","ate","nat","bat"]
+
+Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+
+Explanation:
+
+There is no string in strs that can be rearranged to form "bat".
+The strings "nat" and "tan" are anagrams as they can be rearranged to form each other.
+The strings "ate", "eat", and "tea" are anagrams as they can be rearranged to form each other.
+
+Example 2:
+
+Input: strs = [""]
+
+Output: [[""]]
+
+Example 3:
+
+Input: strs = ["a"]
+
+Output: [["a"]]
+
+ 
+
+Constraints:
+
+1 <= strs.length <= 104
+0 <= strs[i].length <= 100
+strs[i] consists of lowercase English letters.
+
+solution with sorting:
+tc:O(nklogk)
+sc:O(nk)
+
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs)
+    {
+        // Map to store groups of anagrams: sorted string -> vector of original strings
+        unordered_map<string, vector<string>> mp;
+
+        for (const auto& s : strs) {
+            string key = s;       // Copy the string
+            sort(key.begin(), key.end()); // Sort characters to create the key
+
+            // Insert the original string into the map using the sorted key
+            mp[key].push_back(s);
+        }
+
+        // Collect all grouped anagrams from the map into a result vector
+        vector<vector<string>> result;
+        for (auto &it : mp) {
+            result.push_back(it.second);
+        }
+
+        return result;
+    }
+};
+
+
+
+solution witout sorting: 
+tc:O(n*K) same for sc.
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs)
+    {
+        // Map to store groups of anagrams: key -> vector of strings
+        unordered_map<string, vector<string>> mp;
+
+        // Iterate over each string in the input
+        for(int i = 0; i < strs.size(); i++) 
+        {
+            string s = strs[i]; // Current string to process
+
+            // Count frequency of each character in the string
+            vector<int> count(26, 0);
+            for(int j = 0; j < s.size(); j++)
+            {
+                count[s[j] - 'a']++;
+            }
+
+            // Build a unique key based on character frequencies
+            // Example: "eat" -> "#1#0#0...#1#1..." 
+            string key = "";
+            for(int j = 0; j < 26; j++)
+            {
+                key += "#" + to_string(count[j]);
+            }
+
+            // Insert the string into the map using the key
+            // All anagrams will share the same key
+            mp[key].push_back(s);
+        }
+
+        // Collect all grouped anagrams from the map into a result vector
+        vector<vector<string>> result;
+        for(auto &it : mp) {
+            result.push_back(it.second);
+        }
+
+        // Return the grouped anagrams
+        return result;
+    }
+};
