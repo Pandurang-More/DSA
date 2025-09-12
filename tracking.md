@@ -38,7 +38,7 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 - [ ] 16. Find All Anagrams in a String  
 - [ ] 17. Longest Repeating Character Replacement  
 - [ ] 18. Fruits into Baskets (Longest Substring with Two Distinct Characters)  
-- [ ] 19. Permutation in String  
+- [x] 19. Permutation in String  
 - [x] 20. Minimum Size Subarray Sum  
 - [ ] 21. Subarrays with K Different Integers  
 
@@ -87,8 +87,8 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 - [ ] 39. Longest Consecutive Sequence  
 
 **String**  
-- [ ] 40. Valid Anagram  
-- [ ] 41. Group Anagrams  
+- [x] 40. Valid Anagram  
+- [x] 41. Group Anagrams  
 - [ ] 42. Word Pattern  
 - [ ] 43. String Compression  
 - [ ] 44. Encode and Decode Strings  
@@ -106,7 +106,7 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 - [ ] 49. Next Smallest Palindrome  
 
 **String**  
-- [ ] 50. Reverse Words in a String  
+- [x] 50. Reverse Words in a String  
 - [ ] 51. Longest Common Prefix  
 - [ ] 52. Implement strstr() (Substring Search)  
 - [ ] 53. Length of Last Word  
@@ -114,7 +114,7 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 - [ ] 55. Count and Say  
 - [ ] 56. Implement Atoi  
 - [ ] 57. Multiply Strings  
-- [ ] 58. Integer to Roman  
+- [x] 58. Integer to Roman  
 - [ ] 59. Palindromic Substrings  
 - [ ] 60. Longest Palindromic Substring  
 
