@@ -52,7 +52,7 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 - [ ] 23. Maximum Product Subarray  
 - [ ] 24. Subarray Sum Equals K  
 - [ ] 25. Product of Array Except Self  
-- [ ] 26. Count Primes  
+- [x] 26. Count Primes  
 
 ---
 
