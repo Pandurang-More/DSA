@@ -78,8 +78,8 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 ➡️ Uses hashmaps/sets heavily.  
 
 **Array**  
-- [ ] 33. Contains Duplicate  
-- [ ] 34. Majority Element  
+- [x] 33. Contains Duplicate  
+- [x] 34. Majority Element  
 - [ ] 35. Majority Element II  
 - [ ] 36. Find All Numbers Disappeared in an Array  
 - [ ] 37. Find All Duplicates  
