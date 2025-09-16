@@ -1,0 +1,49 @@
+unordered set:
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+           unordered_set<int> seen;  // stores unique numbers we have seen so far
+        
+        for (int n : nums) {
+            if (seen.count(n))    // if 'n' is already in the set, duplicate found
+                return true;
+            seen.insert(n);       // otherwise add it to the set
+        }
+        
+        return false; // no duplicates found after checking all numbers
+    }
+};
+
+using sorting:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        sort(nums.begin(), nums.end());  // sort first
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i] == nums[i - 1])  // check neighbors
+                return true;
+        }
+        return false; // no duplicates found
+    }
+};
+unorderd map:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_map<int, int> freq;  // number → frequency
+        for (int n : nums) {
+            freq[n]++;                 // increase count
+            if (freq[n] >= 2)          // check duplicate
+                return true;
+        }
+        return false; // no duplicates found
+    }
+};
