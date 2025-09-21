@@ -36,20 +36,25 @@ There is at least one word in s.
 
 
 
-class Solution {
+class Solution 
+{
 public:
-    string reverseWords(string s) {
+    string reverseWords(string s)
+      {
           int n= s.length();
           string ans="";
           reverse(s.begin(),s.end());  // first reverse every word in string the sky is blue becomes eulb si yks eht
-          for(int i=0;i<n;i++)
-          {    string temp="";
+          
+           for(int i=0;i<n;i++)
+          {    
+               string temp="";
               while(i<n && s[i]!=' ')    // take each word in temp string and add it.
-              {
+                {
                  temp+=s[i];
                  i++;
-              }
-              reverse(temp.begin(),temp.end()); // reverse that particular word ex eulb becomes bule.
+                }
+
+              reverse(temp.begin(),temp.end()); // reverse that particular word ex eulb becomes blue.
               if(temp.length()>0)
               ans+=" "+ temp;  //  add this final word in ans string.
 
