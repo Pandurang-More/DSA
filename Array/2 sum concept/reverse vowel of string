@@ -46,9 +46,13 @@ public:
         int end=n-1;
         while(start<end)
         {
-        while(start<end && !isvowel(s[start]))start++; // check if strt point to consonant if it true just move to nest char. no swap here
-        while(start<end && !isvowel(s[end])) end--;    // check if end point to consonant if it true just move to nest char. not swap here
-        {
+        while(start<end && !isvowel(s[start])) // check if strt point to consonant if it true just move to nest char. no swap here
+          start++;
+
+        while(start<end && !isvowel(s[end]))     // check if end point to consonant if it true just move to nest char. not swap here
+          end--;
+
+         
             if(start<end)
             {
                 swap(s[start],s[end]);     // swap only both pointer points to vowel
@@ -56,7 +60,7 @@ public:
                 end--;
             }
             
-        }
+        
         }
         return s;
     }
