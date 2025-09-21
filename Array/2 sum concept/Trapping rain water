@@ -22,6 +22,7 @@ n == height.length
 # optimized
 TIme complexity:O(n)
 space complextiy:O(1)
+
 class Solution {
 public:
     int trap(vector<int>& height) {
@@ -44,7 +45,8 @@ public:
         {
             if(height[i] >leftmax)
             leftmax=height[i];                     // go from leftside to the tallest building
-           water+=(leftmax-height[i]);
+            else
+            water+=(leftmax-height[i]);
 
         }
 
@@ -53,6 +55,7 @@ public:
         {
             if(height[i]>rightmax)
             rightmax=height[i];                  // go from rightside to tallest building.
+            else
             water+=(rightmax-height[i]);
         }
 
