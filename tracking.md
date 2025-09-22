@@ -122,3 +122,40 @@ Problems are grouped by **pattern** and ordered in the **sequence you should stu
 
 ✅ **Total: 60 problems** (after removing Matrix + Binary Search ones).  
 ⚡ Suggested sequence: **Pattern order (1 → 7)**.  
+
+
+# Linked List Interview Practice Roadmap
+
+This roadmap is designed to help you systematically practice **top 18 linked list problems** in order from **basic → intermediate → advanced**, commonly asked in MNC interviews.
+
+
+
+---
+
+## 📗 Basic (Fundamentals / Easy)
+- [x] Insert / Delete nodes (front, middle, end) - *Practice implementation yourself*
+- [ ] Reverse entire linked list (iterative & recursive) - [LeetCode 206](https://leetcode.com/problems/reverse-linked-list/)
+- [ ] Find middle node - [LeetCode 876](https://leetcode.com/problems/middle-of-the-linked-list/)
+- [ ] Nth node from end - [LeetCode 19](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
+- [ ] Remove duplicates (sorted) - [LeetCode 83](https://leetcode.com/problems/remove-duplicates-from-sorted-list/)
+- [ ] Detect cycle in a linked list - [LeetCode 141](https://leetcode.com/problems/linked-list-cycle/)
+
+## 📘 Intermediate (Two-pointer & Merging)
+- [ ] Remove duplicates (unsorted) - [LeetCode 1836](https://leetcode.com/problems/remove-duplicates-from-an-unsorted-linked-list/)
+- [ ] Merge two sorted linked lists - [LeetCode 21](https://leetcode.com/problems/merge-two-sorted-lists/)
+- [ ] Check palindrome - [LeetCode 234](https://leetcode.com/problems/palindrome-linked-list/)
+- [ ] Find start of cycle - [LeetCode 142](https://leetcode.com/problems/linked-list-cycle-ii/)
+- [ ] Partition list around a value - [LeetCode 86](https://leetcode.com/problems/partition-list/)
+- [ ] Add two numbers represented by linked lists - [LeetCode 2](https://leetcode.com/problems/add-two-numbers/)
+
+## 📙 Advanced (Complex / Tricky)
+- [ ] Reverse nodes in groups of k - [LeetCode 25](https://leetcode.com/problems/reverse-nodes-in-k-group/)
+- [ ] Reorder list (L0 → Ln → L1 → Ln-1 …) - [LeetCode 143](https://leetcode.com/problems/reorder-list/)
+- [ ] Intersection point of two linked lists - [LeetCode 160](https://leetcode.com/problems/intersection-of-two-linked-lists/)
+- [ ] Sort a linked list (merge sort) - [LeetCode 148](https://leetcode.com/problems/sort-list/)
+- [ ] Multiply numbers represented by linked lists - *Practice implementation yourself*
+
+---
+
+
+
