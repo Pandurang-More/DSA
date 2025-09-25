@@ -1,1 +1,134 @@
+# using extra space vector:
 
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+       ListNode* temp=head;
+       vector<int>ans;
+       while(temp)
+       {
+        ans.push_back(temp->val);
+        temp=temp->next;
+       } 
+       temp=head;
+       int n=ans.size()-1;
+       for( int i=n;i>=0;i--)
+       {
+          temp->val=ans[i];
+          temp=temp->next;
+       }
+       temp=head;
+       return head;
+
+
+    }
+};
+
+
+
+
+
+# without a extra space;
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev = NULL;
+        ListNode* curr = head;  // using three pointer
+        ListNode* fut = NULL;
+        while (curr) {
+            fut = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = fut;
+        }
+        head = prev;
+        return head;
+    }
+};
+
+ Using recursion:
+
+
+ ListNode* reverse (ListNode *curr,ListNode *prev)
+    {
+        if(curr==NULL)
+        return prev;
+        
+        
+        ListNode *fut=curr->next;
+        curr->next=prev;              // using three pointer
+        return  reverse(fut,curr);
+        
+
+    };
+
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+       
+      return reverse(head ,NULL);
+
+    }
+};
+
+
+Call order (forward phase):
+
+reverse(curr = 1, prev = NULL)
+
+fut = 2
+
+1->next = NULL
+
+
+Calls → reverse(2, 1)
+
+reverse(curr = 2, prev = 1)
+
+fut = 3
+
+2->next = 1
+
+
+Calls → reverse(3, 2)
+
+reverse(curr = 3, prev = 2)
+
+fut = 4
+
+3->next = 2
+
+
+Calls → reverse(4, 3)
+
+reverse(curr = 4, prev = 3)
+
+fut = NULL
+
+4->next = 3
+
+
+Calls → reverse(NULL, 4)
+
+reverse(curr = NULL, prev = 4)
+
+Base case → returns 4 (new head)
+
+
+
+Return order (unwinding phase):
+
+reverse(NULL, 4) returns 4
+
+reverse(4, 3) returns 4
+
+reverse(3, 2) returns 4
+
+reverse(2, 1) returns 4
+
+reverse(1, NULL) returns 4
+
+
+✅ Final result: new head = 4
