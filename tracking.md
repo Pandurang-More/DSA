@@ -134,8 +134,8 @@ This roadmap is designed to help you systematically practice **top 18 linked lis
 
 ## 📗 Basic (Fundamentals / Easy)
 - [x] Insert / Delete nodes (front, middle, end) - *Practice implementation yourself*
-- [ ] Reverse entire linked list (iterative & recursive) - [LeetCode 206](https://leetcode.com/problems/reverse-linked-list/)
-- [ ] Find middle node - [LeetCode 876](https://leetcode.com/problems/middle-of-the-linked-list/)
+- [x] Reverse entire linked list (iterative & recursive) - [LeetCode 206](https://leetcode.com/problems/reverse-linked-list/)
+- [x] Find middle node - [LeetCode 876](https://leetcode.com/problems/middle-of-the-linked-list/)
 - [ ] Nth node from end - [LeetCode 19](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
 - [ ] Remove duplicates (sorted) - [LeetCode 83](https://leetcode.com/problems/remove-duplicates-from-sorted-list/)
 - [ ] Detect cycle in a linked list - [LeetCode 141](https://leetcode.com/problems/linked-list-cycle/)
