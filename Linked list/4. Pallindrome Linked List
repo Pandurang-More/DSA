@@ -1,6 +1,8 @@
 
 #  #  two pointer approach
 
+time complexity: O(n)
+space complexity:O(1)
 
 class Solution {
 public:
@@ -77,4 +79,38 @@ public:
      }
 
     
+};
+
+
+recursion
+time complexity:O(n)
+space complexuty:O(n)
+
+
+class Solution {
+public:
+    ListNode* front;  // pointer starting from head
+
+    bool isPalindrome(ListNode* head) {
+        front = head;           // initialize front pointer
+        return check(head);     // start recursion
+    }
+
+private:
+    bool check(ListNode* current) {
+        if (!current)           // base case: end of list
+            return true;
+
+        // Recurse to the end first
+        if (!check(current->next)) // early exit if deeper nodes are not palindrome
+            return false;
+
+        // Compare mirrored nodes
+        if (current->val != front->val)
+            return false;
+
+        // Move front pointer forward
+        front = front->next;
+         return true;
+    }
 };
