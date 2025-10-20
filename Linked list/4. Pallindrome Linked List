@@ -1,0 +1,80 @@
+
+#  #  two pointer approach
+
+
+class Solution {
+public:
+    bool isPalindrome(ListNode* head)
+     {
+
+       
+        if(head==NULL || head->next==NULL)
+        {
+            return true;                             // single and empty node is always pallindrome.
+        }
+         
+        ListNode *fast=head;
+        ListNode *slow=head;
+
+        while(fast && fast->next)            // use slow and fast to find the mid of linked list.
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        
+       
+        if(fast!=NULL)
+        {   
+            slow=slow->next;           // if linked list contain odd element then skip the element.
+        }
+
+        ListNode *prevn=NULL;
+        ListNode *fut=NULL;
+                
+         while(slow)              // reverse the second half.
+        {
+            fut=slow->next;
+            slow->next=prevn;
+            prevn=slow;
+            slow=fut;
+         }
+    
+          
+        ListNode *head1=prevn;
+        ListNode *head2=head;
+
+
+        bool isPalin = true;
+
+     while(head1 != NULL)
+       {
+         if(head1->val != head2->val)       // compare the first and reverse second half.
+         {
+            isPalin = false;
+            break;
+         }
+         head1 = head1->next;
+         head2 = head2->next;
+      }
+
+     
+           // Restore second half
+           
+        ListNode* curr = prevn;          // start of reversed second half
+        prevn = NULL;
+        fut = NULL;
+
+        while(curr)
+           {
+             fut = curr->next;
+             curr->next = prevn;
+             prevn = curr;
+            curr = fut;
+           }
+
+     return isPalin;
+
+     }
+
+    
+};
