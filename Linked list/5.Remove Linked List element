@@ -20,6 +20,9 @@ Output: []
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
+tc is O(n)
+sc is O(1)
 class Solution 
 {
 public:
@@ -50,6 +53,33 @@ public:
          current=current->next;
    }
       return head;      
+}
+
+};
+
+
+  ###   recursive method:
+
+tc and sc is O(n)
+
+class Solution 
+{
+public:
+    ListNode* removeElements(ListNode* head, int val)
+{
+      if(!head) return head; // base case if ll is empty
+
+      head->next=removeElements(head->next,val);  
+  // unwinding 
+      if(head->val==val) // node found
+      {
+        ListNode *temp=head->next;
+        delete head;
+        return temp;
+      }
+
+      return head;  // node not found
+     
 }
 
 };
