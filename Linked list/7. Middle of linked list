@@ -29,5 +29,23 @@ public:
 };
 
  ### RECURSION
+TC AND SC=O(N)
 
+class Solution 
+{
+public:
+    ListNode* findmiddle(ListNode* slow,ListNode* fast)
+    {
+        if(fast==NULL || fast->next==NULL )
+                   return slow;
+
+       return  findmiddle(slow->next,fast->next->next);
+    }
+
+
+    ListNode* middleNode(ListNode* head) 
+    {
+         return findmiddle(head,head);          
+    }
+};
  
