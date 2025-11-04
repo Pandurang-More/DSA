@@ -1,0 +1,49 @@
+For example, in the given tree above, the leaf value sequence is (6, 7, 4, 9, 8).
+
+Two binary trees are considered leaf-similar if their leaf value sequence is the same.
+
+Return true if and only if the two given trees with head nodes root1 and root2 are leaf-similar.
+
+ 
+inplace not possible 
+
+
+
+
+class Solution {
+public:
+   void getleaves(TreeNode* root,vector<int>&leaves)
+   {
+    if(root==NULL)return;
+
+    if(root->left==NULL && root->right==NULL)
+    {
+        leaves.push_back(root->val);
+    }
+
+    getleaves( root->left,leaves);
+    getleaves(root->right,leaves);
+    
+   }
+
+
+
+    bool leafSimilar(TreeNode* root1, TreeNode* root2) 
+    {
+       vector<int>l1,l2;
+       getleaves(root1,l1);
+       getleaves(root2,l2);
+
+       return l1==l2;                                   //Internally, this line means:
+
+                                                         Check if both vectors have the same size.
+
+                                                          If sizes differ → immediately return false.
+
+                                                         If sizes are equal → compare each element one by one:
+
+                                                          If any pair of elements differ → return false.
+
+                                                          If all elements match → return true.
+ }
+};
