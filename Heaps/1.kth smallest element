@@ -18,6 +18,7 @@ space:O(1)
  kth smallest element:build max heap
 kth largest element: build min heap
 time:nlogk
+space:k
 
 1) kth smallest.
 
