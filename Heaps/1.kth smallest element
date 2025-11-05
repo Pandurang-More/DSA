@@ -1,0 +1,51 @@
+Rohit negi:
+
+## Approach 1
+sort the array and find the kth element.
+time:O(nlogn)
+space:O(1)
+
+## Approach 2
+create the min heap and delete the root element each time till the kth element.
+
+time: O(n)+klogn
+worst:O(n)+nlogn tiil last element
+space:O(1)
+
+
+## Approach 3
+
+ kth smallest element:build max heap
+kth largest element: build min heap
+time:nlogk
+
+1) kth smallest.
+
+class Solution 
+{
+  public:
+    int kthSmallest(vector<int> &arr, int k) 
+    {
+        // code here
+        int n=arr.size();
+         priority_queue<int>p;      // by default max heap
+        
+        for(int i=0;i<k;i++)
+        {
+           p.push(arr[i]);         
+        }
+        
+        for(int i=k;i<n;i++)
+        {
+            if(arr[i]<p.top())   //   compare each element with top
+            {
+                p.pop();       // remove maximum
+                p.push(arr[i]);
+            }
+        }
+        
+        return p.top();     // contain the kth smallest element.
+    }
+};
+
+
