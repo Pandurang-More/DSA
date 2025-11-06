@@ -25,7 +25,7 @@ Input: stones = [1]
 Output: 1
  
 
-brute force:
+brute force:n*n*logn
 
 
 class Solution {
@@ -45,6 +45,43 @@ public:
         }
 
         return stones[0];
+    
+     
+     
+
+    }
+};
+ optimized:O(nlogn)
+
+class Solution {
+public:
+    int lastStoneWeight(vector<int>& stones)
+     {       
+
+
+        priority_queue<int>p;
+
+        for(int i=0;i<stones.size();i++)
+        {
+            p.push(stones[i]);    
+        }
+
+        while(p.size()>1)
+        {  
+           
+           int a= p.top();    //logn
+           p.pop();
+           
+           int b= p.top();   // logn 
+           p.pop();
+           
+            if(a!=b)
+           p.push(abs(a-b));   // logn
+
+        }
+
+        return p.empty() ? 0 : p.top();
+;
     
      
      
