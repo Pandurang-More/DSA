@@ -19,6 +19,8 @@ Example 3:
 
 Input: nums = [3,3], target = 6
 Output: [0,1]
+
+
 O(n*n)
 class Solution {
 public:
@@ -35,3 +37,37 @@ public:
      return {};
     }
 };
+
+
+TC and SC:O(N)
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+      int n=nums.size();
+     unordered_map<int,int>seen;
+     for(int i=0;i<nums.size();i++)
+     {
+        int x=nums[i];
+        int complement=target-x;
+
+       
+        auto it = seen.find(complement);   // O(1) average,  // 1) Check if we've already seen the needed complement earlier
+            if (it != seen.end())            //Case	Meaning	What .find() returns
+                                            //Key found	the   key exists in the map	    iterator pointing to that key–value pair
+                                            //Key not found	 the key doesn’t exist	    seen.end() — a special “past-the-end” iterator
+            {
+                // If yes, we found a pair: nums[it->second] + nums[i] == target
+                return {it->second, i};
+            }
+
+                                                                  // 2) Otherwise, remember current number's index for future lookups
+                                                              // Important: we store after checking, to avoid using the same element twice
+            seen[x] = i;  // O(1) average
+
+     }
+       
+       
+     return {};
+    }
+};
+
