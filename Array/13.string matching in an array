@@ -1,0 +1,46 @@
+Given an array of string words, return all strings in words that are a substring of another word. 
+You can return the answer in any order.
+
+ 
+
+Example 1:
+Input: words = ["mass","as","hero","superhero"]
+Output: ["as","hero"]
+Explanation: "as" is substring of "mass" and "hero" is substring of "superhero".
+["hero","as"] is also a valid answer.
+
+Example 2:
+Input: words = ["leetcode","et","code"]
+Output: ["et","code"]
+Explanation: "et", "code" are substring of "leetcode".
+
+Example 3:
+Input: words = ["blue","green","bu"]
+Output: []
+Explanation: No string of words is substring of another string.
+
+
+class Solution
+{
+public:
+    vector<string> stringMatching(vector<string>& words)
+    {
+         vector<string>ans;
+        for(int i=0;i<words.size();i++)
+           {
+            for(int j=0;j<words.size();j++)
+                {    
+                
+                if(i!=j && words[i].find(words[j]) != string::npos)
+                    { //"If words[j] is found inside words[i], and they are not the same string, then do somethi"
+                   ans.push_back(words[j]);  
+                    }
+                }
+           }
+         sort(ans.begin(), ans.end());
+        ans.erase(unique(ans.begin(), ans.end()), ans.end());
+      // unique(begin, end) Reorders vector so duplicates go to the end Returns iterator to new logical end
+      //erase(it, end) Physically deletes elements in that range Shrinks vector size
+        return ans;
+    }
+};
