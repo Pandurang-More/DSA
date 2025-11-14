@@ -1,0 +1,36 @@
+Input: prices[] = [3, 2, 1, 4], k = 2
+Output: [3, 7]
+Explanation: As according to the offer if you buy one candy you can take at most k more for free. So in the first case, 
+you buy the candy worth 1 and takes candies worth 3 and 4 for free, also you need to buy candy worth 2. So min cost: 1+2 = 3.
+In the second case, you can buy the candy worth 4 and takes candies worth 1 and 2 for free, also you need to buy candy worth 3. So max cost: 3+4 = 7
+
+class Solution {
+  public:
+    vector<int> minMaxCandy(vector<int>& prices, int k) {
+        // Code here
+        sort(prices.begin(),prices.end());   // sort to arrange the prices
+        vector<int>ans;
+        int start=0,end=prices.size()-1;
+        int mincandy=0;
+        int maxcandy=0;
+        while(start <=end)                        // if want min candy then start from start 
+        {
+            mincandy+=prices[start];
+            start++;
+            end-=k;
+        }
+       
+         start=0,end=prices.size()-1;          // it is necessary to reintialized.
+
+        while(start<=end)                       // if want max then start from end
+        {
+            maxcandy+=prices[end];
+            end--;
+            start+=k;
+        }
+          ans.push_back(mincandy);
+          ans.push_back(maxcandy);
+          
+          return ans;
+    }
+};
