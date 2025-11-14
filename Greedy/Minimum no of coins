@@ -1,0 +1,30 @@
+Input: n = 39
+Output: 6
+Explaination: 39 can be formed using 3 coins of 10 rupees, 1 coin of 5 rupees and 2 coins of 2 rupees so minimum coins required are 6
+
+class Solution {
+  public:
+    int findMin(int n) 
+    {
+        // code here
+        int currency[]={10,5,2,1};
+        int i=0;
+        int notes=0;
+        vector<int>ans;
+        while(n)
+        {
+            notes=n/currency[i];   // if got number greater than 1 then that times notes added.
+            while(notes--)
+            {
+              ans.push_back(currency[i]);
+            }
+         
+            n=n%currency[i];// if got less than one then we goto next index.
+               i++;
+            
+            
+        }
+        
+        return ans.size();
+    }
+};
