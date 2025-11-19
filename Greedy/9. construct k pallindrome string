@@ -1,0 +1,82 @@
+1400. Construct K Palindrome Strings
+Solved
+Medium
+Topics
+premium lock icon
+Companies
+Hint
+Given a string s and an integer k, return true if you can use all the characters in s to construct non-empty
+k palindrome strings or false otherwise.
+
+ 
+
+Example 1:
+Input: s = "annabelle", k = 2
+Output: true
+Explanation: You can construct two palindromes using all characters in s.
+Some possible constructions "anna" + "elble", "anbna" + "elle", "anellena" + "b"
+
+Example 2:
+Input: s = "leetcode", k = 3
+Output: false
+Explanation: It is impossible to construct 3 palindromes using all the characters of s.
+Example 3:
+
+Input: s = "true", k = 4
+Output: true
+Explanation: The only possible solution is to put each character in a separate string.
+
+
+
+class Solution {
+public:
+    bool canConstruct(string s, int k)
+    {
+        int n = s.size();
+
+        // If we have fewer characters than k strings → impossible
+        if (n < k) return false;
+
+        // If number of characters equals number of strings → each string gets 1 char
+        if (n == k) return true;
+
+        // Count how many characters have odd frequency
+        int oddcount = 0;
+        vector<int> freq(26, 0);
+
+        // Frequency of each character
+        for (char c : s)
+            freq[c - 'a']++;
+
+        // A palindrome requires at most 'k' odd-frequency chars
+        for (int i = 0; i < 26; i++)
+        {
+            if (freq[i] % 2 == 1)
+                oddcount++;
+        }
+
+        // If we have more odd-char groups than k palindromes → impossible
+        return oddcount <= k;
+    }
+};
+
+
+A palindrome can be formed if at most one character has an odd frequency (for one string).
+
+But here we want to form k palindromes.
+So the rule becomes:
+
+🔹 Each palindrome can take at most 1 odd-frequency character as its center.
+
+Therefore:
+
+If a character has even frequency,
+→ it can always be split and placed symmetrically (left-right) in any palindrome.
+→ So even counts never cause problems.
+
+If a character has odd frequency,
+→ we must place one occurrence in the center of some palindrome.
+→ So odd frequencies limit how many palindromes we need.
+
+✅ Therefore:
+✔ Only the number of odd-frequency characters matters.
