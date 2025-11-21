@@ -1,0 +1,57 @@
+You are given an integer array nums. In one move, you can pick an index i where 0 <= i < nums.length and increment nums[i] by 1.
+
+Return the minimum number of moves to make every value in nums unique.
+
+The test cases are generated so that the answer fits in a 32-bit integer.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,2]
+Output: 1
+Explanation: After 1 move, the array could be [1, 2, 3].
+Example 2:
+
+Input: nums = [3,2,1,2,1,7]
+Output: 6
+Explanation: After 6 moves, the array could be [3, 4, 1, 2, 5, 7].
+It can be shown that it is impossible for the array to have all unique values with 5 or less moves.
+ 
+
+
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    int minIncrementForUnique(vector<int>& nums) 
+    {
+        // Step 1: Sort the array so duplicates and smaller values come together
+        sort(nums.begin(), nums.end());
+
+        int count = 0; // total increments needed
+        
+        // Step 2: Traverse from the second element
+        for (int i = 1; i < nums.size(); i++)
+        {
+            // If current value is NOT strictly greater than the previous,
+            // we must increase it to make all elements unique
+            if (nums[i-1] >= nums[i])
+            {
+                // Amount needed to make nums[i] = nums[i-1] + 1
+                int change = (nums[i-1] - nums[i]) + 1;
+
+                count += change;  // Add the increments to the total
+                nums[i] += change; // Update the number so next comparisons are correct
+            }
+        }
+
+        return count; // Return minimum increments needed
+    }
+};
