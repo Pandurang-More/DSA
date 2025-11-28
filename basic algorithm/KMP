@@ -1,0 +1,82 @@
+Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or 
+-1 if needle is not part of haystack.
+
+ 
+
+Example 1:
+
+Input: haystack = "sadbutsad", needle = "sad"
+Output: 0
+Explanation: "sad" occurs at index 0 and 6.
+The first occurrence is at index 0, so we return 0.
+Example 2:
+
+Input: haystack = "leetcode", needle = "leeto"
+Output: -1
+Explanation: "leeto" did not occur in "leetcode", so we return -1.
+ 
+
+
+
+class Solution {
+public:
+
+    // Build LPS (Longest Prefix Suffix) array
+    void findlps(vector<int>& lps, string s)
+    {   
+        int pre = 0;      // pre = length of previous longest prefix
+        int suf = 1;      // suf = current index in string
+
+        while (suf < s.size())
+        {
+            if (s[pre] == s[suf])     // characters match
+            {  
+                lps[suf] = pre + 1;   // store length of prefix
+                pre++;                // move prefix pointer
+                suf++;                // move suffix pointer
+            }
+            else                     // mismatch
+            {
+                if (pre == 0)         // if prefix is at 0
+                {
+                    lps[suf] = 0;     // no prefix match
+                    suf++;            // move suffix ahead
+                }
+                else
+                {
+                    pre = lps[pre-1]; // jump prefix to previous LPS value
+                }
+            }
+        }
+    }
+
+    int strStr(string haystack, string needle) 
+    {
+        vector<int> lps(needle.size(), 0);   // create LPS array
+        findlps(lps, needle);                // fill LPS array
+
+        int first = 0;     // pointer for haystack
+        int second = 0;    // pointer for needle
+
+        while (first < haystack.size() && second < needle.size())
+        {
+            if (haystack[first] == needle[second])  // characters match
+            {
+                first++;      // move both pointers
+                second++;
+            }
+            else                                 // mismatch
+            {
+                if (second == 0)                 // can't go back in needle
+                    first++;                     // move haystack forward
+                else
+                    second = lps[second - 1];    // jump needle pointer using LPS
+            }
+        }
+
+        if (second == needle.size())             // full match found
+            return first - second;               // return starting index
+
+        return -1;                               // no match
+    }
+};
