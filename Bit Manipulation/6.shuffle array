@@ -1,0 +1,19 @@
+
+
+
+class Solution {
+public:
+    vector<int> shuffle(vector<int>& nums, int n) {
+        vector<int> ans;                 
+        ans.reserve(nums.size());        // Reserve space to avoid resizing
+
+        // Loop through the first half of the array
+        for (int i = 0; i < n; i++) {
+
+            ans.push_back(nums[i]);      // Take element from first half → x_i
+            ans.push_back(nums[i + n]);  // Take element from second half → y_i
+        }
+
+        return ans;                      // Return the shuffled array
+    }
+};
