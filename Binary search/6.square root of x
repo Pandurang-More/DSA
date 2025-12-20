@@ -45,7 +45,7 @@ public:
             int mid = (right + left) / 2;
 
             if (mid == 0)
-                return mid;
+                return mid;                         // prevent  division by zero
 
             if (mid < x / mid)
             {
@@ -56,9 +56,9 @@ public:
                 right = mid - 1;
             }
             else
-                return mid;
+                return mid;                    // perfect square found
         }
 
-        return right;
+        return right;                          // largest element possible for not perfect square.
     }
 };
