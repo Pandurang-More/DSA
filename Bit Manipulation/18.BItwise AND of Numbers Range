@@ -38,7 +38,8 @@ public:
     }
 };
 
-to reprsent any number in binary we require logn bit, worst case we have to check all numbers so total time complexity is logn.
+to reprsent any number in binary we require logn bit, 
+worst case we have to check all numbers so total time complexity is logn.
 
 
 Approach 2
