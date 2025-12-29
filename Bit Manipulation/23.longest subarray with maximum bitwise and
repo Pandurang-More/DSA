@@ -1,0 +1,31 @@
+whenever we to bitwise and operation with number the result is always less than or equal to in that given numbers.
+
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums) 
+    {
+        int maxvalue = 0;
+        for (int num : nums)
+        {
+            maxvalue = max(maxvalue, num);
+        }
+
+        int maxlength = 0;
+        int currentlength = 0;
+
+        for (int num : nums)
+        {
+            if (num == maxvalue)
+            {
+                currentlength++;
+                maxlength = max(maxlength, currentlength);
+            }
+            else
+            {
+                currentlength = 0;
+            }
+        }
+
+        return maxlength;
+    }
+};
