@@ -41,17 +41,33 @@ public:
             for (int num : nums)
             {
                 if (num & temp)
-                    countones++;
+                    countones++;                       // goes at each number ith bit position
             }
 
-            if (countones % 3 == 1)
+            if (countones % 3 == 1)                   // only countones is required, because it will help in xoring.
                 result |= temp;
         }
 
         return result;
     }
 };
+Approach 1: Bit Counting (Bit Manipulation)
 
+Every number appears three times except one.
+
+For each bit position (0 to 31), count how many numbers have that bit set.
+
+Since repeated numbers appear 3 times, their bit counts will be multiples of 3.
+
+The remaining bit (count % 3 == 1) belongs to the single number.
+
+Rebuild the answer by setting those bits.
+
+Key idea:
+Bits repeating 3 times cancel out using modulo 3.
+
+Time Complexity: O(32 × N) ≈ O(N)
+Space Complexity: O(1)
 
 
 Approach 2
@@ -72,6 +88,22 @@ public:
         return ones;
     }
 };
+Approach 2: State Machine using Bitwise XOR
 
+Uses two variables:
+
+ones → stores bits appearing once
+
+twos → stores bits appearing twice
+
+When a bit appears the third time, it is removed from both ones and twos.
+
+This works like a modulo-3 counter for each bit.
+
+Key idea:
+Track bit frequency using XOR and masking instead of counting.
+
+Time Complexity: O(N)
+Space Complexity: O(1)
 
 both have same tc and sc.
