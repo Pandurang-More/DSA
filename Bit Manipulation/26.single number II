@@ -106,4 +106,11 @@ Track bit frequency using XOR and masking instead of counting.
 Time Complexity: O(N)
 Space Complexity: O(1)
 
+| ones | twos | Meaning               |
+| ---- | ---- | --------------------- |
+| 0    | 0    | bit seen 0 or 3 times |
+| 1    | 0    | bit seen 1 time       |
+| 0    | 1    | bit seen 2 times      |
+
+
 both have same tc and sc.
