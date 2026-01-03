@@ -1,0 +1,35 @@
+Input:
+List = 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
+M = 2, N = 2
+
+Output:
+1 → 2 → 5 → 6
+
+
+class Solution {
+public:
+    ListNode* deleteNodes(ListNode* head, int m, int n) {
+        ListNode* curr = head;
+
+        while (curr != NULL) {
+            // Step 1: Skip M-1 nodes
+            for (int i = 1; i < m && curr != NULL; i++) {
+                curr = curr->next;
+            }
+
+            if (curr == NULL) break;
+
+            // Step 2: Delete next N nodes
+            ListNode* temp = curr->next;
+            for (int i = 0; i < n && temp != NULL; i++) {
+                temp = temp->next;
+            }
+
+            // Step 3: Link remaining list
+            curr->next = temp;
+            curr = temp;
+        }
+
+        return head;
+    }
+};
