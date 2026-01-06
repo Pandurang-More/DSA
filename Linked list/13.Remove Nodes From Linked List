@@ -1,29 +1,22 @@
-You are given the head of a linked list.
+/*
+===========================================================
+PROBLEM:
+Remove every node which has a node with a greater value
+anywhere to the right side of it.
+===========================================================
 
-Remove every node which has a node with a greater value anywhere to the right side of it.
-
-Return the head of the modified linked list.
-
-Input: head = [5,2,13,3,8]
+Example 1:
+Input:  head = [5,2,13,3,8]
 Output: [13,8]
-Explanation: The nodes that should be removed are 5, 2 and 3.
-- Node 13 is to the right of node 5.
-- Node 13 is to the right of node 2.
-- Node 8 is to the right of node 3.
-Example 2:
 
-Input: head = [1,1,1,1]
+Example 2:
+Input:  head = [1,1,1,1]
 Output: [1,1,1,1]
-Explanation: Every node has value 1, so no nodes are removed.
- 
 
 Constraints:
-
-The number of the nodes in the given list is in the range [1, 105].
-1 <= Node.val <= 105
-
-
-
+1 <= number of nodes <= 10^5
+1 <= Node.val <= 10^5
+*/
 
 /**
  * Definition for singly-linked list.
@@ -35,136 +28,133 @@ The number of the nodes in the given list is in the range [1, 105].
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
+
+/* =========================================================
+   APPROACH 1: STACK
+   ========================================================= */
+
 class Solution {
 public:
     ListNode* removeNodes(ListNode* head) 
     {
-      stack<ListNode*>st;
-      ListNode *curr=head;
+        stack<ListNode*> st;
+        ListNode* curr = head;
 
-      while(curr!=NULL)
-      {
-        st.push(curr);
-        curr=curr->next;
-      }
-
-       curr= st.top();
-       st.pop();
-
-       int maxnode=curr->val;
-       ListNode *resulthead=new ListNode(curr->val);
-
-      while(!st.empty())
-      {
-       curr= st.top();
-       st.pop();
-
-       if(curr->val<maxnode)
-       {
-        continue;
-       }
-       else
-       {
-        ListNode *newnode=new ListNode(curr->val);
-        newnode->next=resulthead;
-        resulthead=newnode;
-        maxnode=curr->val;
-       }
-
-     
+        while (curr != NULL)
+        {
+            st.push(curr);
+            curr = curr->next;
         }
-      return resulthead;
+
+        curr = st.top();
+        st.pop();
+
+        int maxnode = curr->val;
+        ListNode* resulthead = new ListNode(curr->val);
+
+        while (!st.empty())
+        {
+            curr = st.top();
+            st.pop();
+
+            if (curr->val < maxnode)
+            {
+                continue;
+            }
+            else
+            {
+                ListNode* newnode = new ListNode(curr->val);
+                newnode->next = resulthead;
+                resulthead = newnode;
+                maxnode = curr->val;
+            }
+        }
+
+        return resulthead;
     }
 };
 
-recursion
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
+
+/* =========================================================
+   APPROACH 2: RECURSION
+   ========================================================= */
+
 class Solution {
 public:
     ListNode* removeNodes(ListNode* head) 
-    { 
-
-        if(head==NULL || head->next==NULL)
+    {
+        if (head == NULL || head->next == NULL)
         {
             return head;
         }
-      ListNode *nextnode=removeNodes(head->next);
 
-      if( head->val<nextnode->val)
-      {
-         
-         return nextnode;
-      }
-      
-        head->next=nextnode;
+        ListNode* nextnode = removeNodes(head->next);
+
+        if (head->val < nextnode->val)
+        {
+            return nextnode;
+        }
+
+        head->next = nextnode;
         return head;
-      
     }
 };
-Approach 3 : reverse linked list
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
+
+
+/* =========================================================
+   APPROACH 3: REVERSE LINKED LIST
+   ========================================================= */
+
 class Solution {
 public:
 
-    ListNode *reverseList(ListNode *head)
+    ListNode* reverseList(ListNode* head)
     {
-         if(head==NULL || head->next==NULL)
+        if (head == NULL || head->next == NULL)
         {
             return head;
         }
 
-       ListNode *last= reverseList(head->next);
-        head->next->next=head;
-        head->next=NULL;
+        ListNode* last = reverseList(head->next);
+        head->next->next = head;
+        head->next = NULL;
 
         return last;
-
     }
+
     ListNode* removeNodes(ListNode* head) 
-    {         
-       if(head==NULL || head->next==NULL)
+    {
+        if (head == NULL || head->next == NULL)
         {
             return head;
         }
-            
-             head=reverseList(head);
-             int maxnode=-1;
-             ListNode *curr=head;
-             ListNode *prev=NULL;
-             while(curr!=NULL)
-             {  
-                maxnode=max(maxnode,curr->val);
-                if(curr->val<maxnode)
-                {
-                    prev->next=curr->next;
-                    ListNode *temp=curr;
-                    curr=curr->next;
-                    //delete(temp);
-                }
-                else
-                {
-                   prev=curr;
-                   curr=curr->next;
-                }
-             }
-          return (reverseList(head));    
+
+        head = reverseList(head);
+
+        int maxnode = -1;
+        ListNode* curr = head;
+        ListNode* prev = NULL;
+
+        while (curr != NULL)
+        {
+            maxnode = max(maxnode, curr->val);
+
+            if (curr->val < maxnode)
+            {
+                prev->next = curr->next;
+                ListNode* temp = curr;
+                curr = curr->next;
+                // delete(temp);                          // in leetcode this line give error if we freee memory bec 
+                                                          //leetcode does it own free memry
+            }
+            else
+            {
+                prev = curr;
+                curr = curr->next;
+            }
+        }
+
+        return reverseList(head);
     }
 };
