@@ -125,3 +125,17 @@ reverse(2, 1) returns 4
 reverse(1, NULL) returns 4  
 
 ✅ Final result: new head = 4
+
+
+
+ListNode* reverseList(ListNode* head) {
+    if (head == NULL || head->next == NULL)
+        return head;
+
+    ListNode* last = reverseList(head->next);
+
+    head->next->next = head;
+    head->next = NULL;
+
+    return last;
+}
