@@ -110,3 +110,61 @@ public:
       
     }
 };
+Approach 3 : reverse linked list
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+
+    ListNode *reverseList(ListNode *head)
+    {
+         if(head==NULL || head->next==NULL)
+        {
+            return head;
+        }
+
+       ListNode *last= reverseList(head->next);
+        head->next->next=head;
+        head->next=NULL;
+
+        return last;
+
+    }
+    ListNode* removeNodes(ListNode* head) 
+    {         
+       if(head==NULL || head->next==NULL)
+        {
+            return head;
+        }
+            
+             head=reverseList(head);
+             int maxnode=-1;
+             ListNode *curr=head;
+             ListNode *prev=NULL;
+             while(curr!=NULL)
+             {  
+                maxnode=max(maxnode,curr->val);
+                if(curr->val<maxnode)
+                {
+                    prev->next=curr->next;
+                    ListNode *temp=curr;
+                    curr=curr->next;
+                    //delete(temp);
+                }
+                else
+                {
+                   prev=curr;
+                   curr=curr->next;
+                }
+             }
+          return (reverseList(head));    
+    }
+};
