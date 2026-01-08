@@ -28,17 +28,6 @@ Explanation:
 There is only one node with a twin in the linked list having twin sum of 1 + 100000 = 100001.
  
 
-
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
 public:
     int pairSum(ListNode* head) 
@@ -68,17 +57,6 @@ public:
 
 using stack
 
-
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
 public:
     int pairSum(ListNode* head) 
@@ -107,5 +85,57 @@ public:
 
         return twinsum;
 
+    }
+};
+
+
+using reverse linked list concept
+class Solution {
+public:
+
+
+     
+ ListNode *reverse(ListNode *head)
+        {
+            ListNode *curr=head;
+            ListNode *prev=NULL;
+            ListNode *fut=NULL;
+
+            while(curr!=NULL)
+            {
+                fut=curr->next;
+                curr->next=prev;
+                prev=curr;
+                curr=fut;
+            } 
+            head=prev;
+            return head;
+
+        }
+
+    int pairSum(ListNode* head) 
+    {
+        ListNode *fast=head;
+        ListNode *slow=head;
+        while(fast !=NULL && fast->next!=NULL)
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+
+        ListNode *mid=slow;
+
+        ListNode *curr=reverse(mid);
+
+        int twinsum=0;
+        while(curr!=NULL)
+        {
+          twinsum=max(twinsum,curr->val+head->val);
+          curr=curr->next;
+          head=head->next;
+        }
+
+        return twinsum;
+       
     }
 };
