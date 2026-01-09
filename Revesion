@@ -1,1 +1,5 @@
 #include <bits/stdc++.h>
+
+
+int count = __builtin_popcount(n);  // count no of set bits
+
