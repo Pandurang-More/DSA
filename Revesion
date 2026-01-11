@@ -3,3 +3,13 @@
 
 int count = __builtin_popcount(n);  // count no of set bits
 
+Gray code can be generated using the formula i ^ (i >> 1) which guarantees adjacent numbers differ by exactly one bit
+Why Only One Bit Changes?
+
+i >> 1 shifts bits to the right
+
+XOR (^) flips only the bit that changes
+
+Between consecutive i, only one bit differs
+
+That’s why it forms a valid Gray Code sequence.
