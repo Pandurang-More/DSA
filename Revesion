@@ -17,3 +17,6 @@ That’s why it forms a valid Gray Code sequence.
 
 3)
 use frequency counting with fixed-size arrays since only lowercase letters are involved
+
+4) char maxchar='9';
+ string(3,maxchar); // 999
