@@ -39,3 +39,47 @@ public:
         return ans; // remaining char is the extra one
     }
 };
+
+using unordered set:
+
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+       unordered_map<char,int>mp;
+       for(char &ch:s)
+       {
+        mp[ch]++;
+       }
+       for(char &ch:t)
+       {
+        mp[ch]--;
+        if(mp[ch]<0)
+        {
+            return ch;
+        }
+       }
+
+       return 'x';  // here we never come;
+    }
+};
+
+// ASCII CODE
+
+class Solution {
+public:
+    char findTheDifference(string s, string t) 
+    {
+       int sums=0;
+       for(char &ch:s)
+       {
+        sums+=ch;
+       }
+       int sumt=0;
+       for(char &ch:t)
+       {
+        sumt+=ch;
+       }
+
+       return char(sumt-sums);
+    }
+};
