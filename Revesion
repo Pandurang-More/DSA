@@ -13,3 +13,7 @@ XOR (^) flips only the bit that changes
 Between consecutive i, only one bit differs
 
 That’s why it forms a valid Gray Code sequence.
+
+
+3)
+use frequency counting with fixed-size arrays since only lowercase letters are involved
