@@ -1,0 +1,88 @@
+/*
+====================================================
+Number of Matches in Tournament
+====================================================
+
+You are given an integer n, the number of teams in a tournament
+that has strange rules:
+
+- If the current number of teams is even, each team gets paired
+  with another team. A total of n / 2 matches are played, and
+  n / 2 teams advance to the next round.
+
+- If the current number of teams is odd, one team randomly advances,
+  and the rest gets paired. A total of (n - 1) / 2 matches are played,
+  and (n - 1) / 2 + 1 teams advance to the next round.
+
+Return the number of matches played in the tournament until a
+winner is decided.
+
+----------------------------------------------------
+Example 1:
+Input: n = 7
+Output: 6
+
+Explanation:
+1st Round: Teams = 7, Matches = 3, Advance = 4
+2nd Round: Teams = 4, Matches = 2, Advance = 2
+3rd Round: Teams = 2, Matches = 1, Winner
+Total matches = 3 + 2 + 1 = 6
+
+----------------------------------------------------
+Example 2:
+Input: n = 14
+Output: 13
+
+Explanation:
+1st Round: Teams = 14, Matches = 7, Advance = 7
+2nd Round: Teams = 7, Matches = 3, Advance = 4
+3rd Round: Teams = 4, Matches = 2, Advance = 2
+4th Round: Teams = 2, Matches = 1, Winner
+Total matches = 7 + 3 + 2 + 1 = 13
+
+----------------------------------------------------
+Constraints:
+- 1 <= n <= 200
+====================================================
+*/
+
+
+/* ==================================================
+   O(log n) Solution
+   ================================================== */
+class Solution {
+public:
+    int numberOfMatches(int n) {
+        int matches = 0;
+
+        while (n > 1) {
+            if (n % 2 == 0) {
+                matches += n / 2;
+                n = n / 2;
+            } else {
+                matches += (n - 1) / 2;
+                n = (n - 1) / 2 + 1;
+            }
+        }
+
+        return matches;
+    }
+};
+
+
+
+/* ==================================================
+   O(1) Solution
+   ==================================================
+
+   Explanation:
+   - If one team plays, one team wins and one team loses → 1 match
+   - If n teams play, one winner remains and (n - 1) teams lose
+   - Therefore, total matches = n - 1
+   ================================================== */
+class Solution {
+public:
+    int numberOfMatches(int n) {
+        return n - 1;
+    }
+};
