@@ -1,0 +1,54 @@
+/*
+====================================================
+Transpose of Matrix
+====================================================
+
+Given a matrix, return its transpose.
+
+----------------------------------------------------
+Approach 1:
+Works for any rectangular matrix (m x n)
+We create a new matrix of size (n x m)
+
+----------------------------------------------------
+Follow-up:
+If only a square matrix is given, then we can
+transpose it in-place by swapping elements.
+====================================================
+*/
+
+
+/* ==================================================
+   General Matrix Transpose (m x n → n x m)
+   ================================================== */
+class Solution {
+public:
+    vector<vector<int>> transpose(vector<vector<int>>& matrix) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+
+        vector<vector<int>> ans(n, vector<int>(m));   // changes from m*n to n*m
+
+        for (int i = 0; i < m; i++)
+        {                                              // we are iterating from given array
+            for (int j = 0; j < n; j++)
+            {
+                ans[j][i] = matrix[i][j];
+            }
+        }
+
+        return ans;
+    }
+};
+
+
+
+/* ==================================================
+   Follow-up: Square Matrix Transpose (In-place)
+   ================================================== */
+for (int i = 0; i < m; i++)
+{
+    for (int i = 0; j < n; i++)
+        if (j > i)
+            swap(matrix[i][j], matrix[j][i]);
+}
