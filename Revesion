@@ -20,3 +20,6 @@ use frequency counting with fixed-size arrays since only lowercase letters are i
 
 4) char maxchar='9';
  string(3,maxchar); // 999
+
+5) return num.substr(0,i+1)
+0 is the first index and i+1 is the lenght of substring you want form 0.
