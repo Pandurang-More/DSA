@@ -1,0 +1,98 @@
+/*
+====================================================
+Maximum Product Difference Between Two Pairs
+====================================================
+
+The product difference between two pairs (a, b) and (c, d)
+is defined as (a * b) - (c * d).
+
+Example:
+The product difference between (5, 6) and (2, 7)
+= (5 * 6) - (2 * 7) = 16.
+
+Given an integer array nums, choose four distinct indices
+w, x, y, and z such that the product difference between
+pairs (nums[w], nums[x]) and (nums[y], nums[z]) is maximized.
+
+Return the maximum such product difference.
+
+----------------------------------------------------
+Example 1:
+Input:  nums = [5,6,2,7,4]
+Output: 34
+
+Explanation:
+Choose (6,7) and (2,4)
+(6 * 7) - (2 * 4) = 34
+
+----------------------------------------------------
+Example 2:
+Input:  nums = [4,2,5,9,7,4,8]
+Output: 64
+
+Explanation:
+Choose (9,8) and (2,4)
+(9 * 8) - (2 * 4) = 64
+
+----------------------------------------------------
+Constraints:
+- 4 <= nums.length <= 10^4
+- 1 <= nums[i] <= 10^4
+====================================================
+*/
+
+
+/* ==================================================
+   Approach 1: Sorting
+   ================================================== */
+class Solution {
+public:
+    int maxProductDifference(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+
+        return ((nums[nums.size() - 1] * nums[nums.size() - 2])
+                - (nums[1] * nums[0]));
+    }
+};
+
+
+
+/* ==================================================
+   Approach 2: Single Pass (Without Sorting)
+   ================================================== */
+class Solution {
+public:
+    int maxProductDifference(vector<int>& nums) 
+    {
+        int largest = INT_MIN;
+        int seclargest = INT_MIN;
+        int smallest = INT_MAX;
+        int secsmallest = INT_MAX;
+        int n = nums.size() - 1;
+
+        for (int i = 0; i <= n; i++)
+        {
+            if (nums[i] > largest)
+            {
+                seclargest = largest;
+                largest = nums[i];
+            }
+            else
+            {
+                seclargest = max(seclargest, nums[i]);
+            }
+
+            if (nums[i] < smallest)
+            {
+                secsmallest = smallest;
+                smallest = nums[i];
+            }
+            else
+            {
+                secsmallest = min(secsmallest, nums[i]);
+            }
+        }
+
+        return (largest * seclargest) - (smallest * secsmallest);
+    }
+};
