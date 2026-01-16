@@ -1,21 +1,36 @@
-Write a function to find the longest common prefix string amongst an array of strings.
+/*
+====================================================
+Longest Common Prefix
+====================================================
+
+Write a function to find the longest common prefix
+string amongst an array of strings.
 
 If there is no common prefix, return an empty string "".
 
- 
-
+----------------------------------------------------
 Example 1:
-
-Input: strs = ["flower","flow","flight"]
+Input:  strs = ["flower","flow","flight"]
 Output: "fl"
+
+----------------------------------------------------
 Example 2:
-
-Input: strs = ["dog","racecar","car"]
+Input:  strs = ["dog","racecar","car"]
 Output: ""
-Explanation: There is no common prefix among the input strings.
 
-time complexity:O(n log n * m)
+Explanation:
+There is no common prefix among the input strings.
 
+----------------------------------------------------
+Time Complexity:
+O(n log n * m)
+====================================================
+*/
+
+
+/* ==================================================
+   Approach 1: Sorting (Lexicographical Order)
+   ================================================== */
 class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs) 
@@ -24,35 +39,37 @@ public:
        sort(strs.begin(),strs.end());    // sort the strings in lexo order 
        string ans;
        
-       string first=strs[0               
-       string  last=strs[strs.size()-1];         // stored the first and last string in  another string.
+       string first=strs[0];             
+       string last=strs[strs.size()-1];  // stored the first and last string in another string.
 
         for(int i=0;i<first.size();i++)
         {
             if(first[i]==last[i])
             {
-              ans.push_back(first[i]);           // Add the matched string in ans
+              ans.push_back(first[i]);   // Add the matched string in ans
             }
-
             else
             {
-                break;                         // else not matched break;
+                break;                   // else not matched break;
             }
-           
-
         }
           
-            return ans;
+        return ans;
     }
-    
 };
 
-Horizontal Scanning
+
+/* ==================================================
+   Horizontal Scanning
+   ==================================================
+
 | Operation              | Complexity               |
 | ---------------------- | ------------------------ |
 | Each string comparison | O(m) (m = prefix length) |
-| For n strings total    | **O(n × m)**             |
-| Space used             | **O(1)** (in-place)      |
+| For n strings total    | O(n × m)                 |
+| Space used             | O(1) (in-place)          |
+*/
+
 
 class Solution 
 {
@@ -60,22 +77,19 @@ public:
     string longestCommonPrefix(vector<string>& strs) 
     {
 
-       
-       string prefix=strs[0];          //store the first string in prefix
-      
+       string prefix = strs[0];          // store the first string in prefix
 
         for(int i=1;i<strs.size();i++)
         {
-while(strs[i].find(prefix)!=0) //strs[i].find(prefix) == 0 → means the current string starts with that prefix.
-                                  //  strs[i].find(prefix) != 0 → means it doesn’t start with that prefix.
+            while(strs[i].find(prefix) != 0)
+            // strs[i].find(prefix) == 0 → string starts with prefix
+            // strs[i].find(prefix) != 0 → string does not start with prefix
             {
-              prefix= prefix.substr(0,prefix.size()-1); // if not start with prefix then shrink from end
-              if(prefix.empty())return "";
-            }  
-
+                prefix = prefix.substr(0, prefix.size() - 1); // shrink prefix
+                if(prefix.empty()) return "";
+            }
         }
           
-            return prefix;
+        return prefix;
     }
-    
 };
