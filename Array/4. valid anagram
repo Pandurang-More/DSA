@@ -19,6 +19,9 @@ Output: false
 */
 
 
+/* ==================================================
+   Method 1: Using Two Frequency Arrays (ASCII)
+   ================================================== */
 class Solution {
 public:
     bool isAnagram(string s, string t) {
@@ -37,10 +40,15 @@ public:
         return shash == thash;
     }
 };
-freq array :this is best method.
 
+
+
+/* ==================================================
+   Method 2: Frequency Array (Best Method)
+   ================================================== */
 bool isAnagram(string s, string t) {
-    if (s.size() != t.size()) return false;
+    if (s.size() != t.size())
+        return false;
 
     vector<int> freq(26, 0);
 
@@ -57,15 +65,22 @@ bool isAnagram(string s, string t) {
     return true;
 }
 
-unordered map:
 
+
+/* ==================================================
+   Method 3: Using Unordered Map
+   ================================================== */
 bool isAnagram(string s, string t) {
-    if (s.size() != t.size()) return false;
+    if (s.size() != t.size())
+        return false;
 
     unordered_map<char, int> mp;
 
-    for (char c : s) mp[c]++;
-    for (char c : t) mp[c]--;
+    for (char c : s)
+        mp[c]++;
+
+    for (char c : t)
+        mp[c]--;
 
     for (auto &p : mp) {
         if (p.second != 0)
