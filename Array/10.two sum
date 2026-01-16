@@ -62,34 +62,19 @@ public:
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int, int> seen;
+        unordered_map<int, int> mp; // value -> index
 
-        for (int i = 0; i < nums.size(); i++)
-        {
-            int x = nums[i];
-            int complement = target - x;
+        for (int i = 0; i < nums.size(); i++) {
+            int need = target - nums[i];
 
-            // 1) Check if complement already exists
-            auto it = seen.find(complement);   // O(1) average
-
-            /*
-            Case               Meaning                         find() result
-            ---------------------------------------------------------------
-            Key found          key exists in map               iterator to key-value pair
-            Key not found      key does not exist              seen.end()
-            */
-
-            if (it != seen.end())
-            {
-                // Found indices where nums[it->second] + nums[i] == target
-                return {it->second, i};
+            // if needed number already seen
+            if (mp.count(need)) {
+                return {mp[need], i};
             }
 
-            // 2) Store current value with index
-            // Store AFTER checking to avoid using the same element twice
-            seen[x] = i;
+            // store current number
+            mp[nums[i]] = i;
         }
-
         return {};
     }
 };
