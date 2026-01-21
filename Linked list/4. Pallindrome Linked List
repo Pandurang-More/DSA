@@ -1,116 +1,122 @@
+/****************************************************************************************************************************************************************
+PALINDROME LINKED LIST
+****************************************************************************************************************************************************************
+Two Pointer Approach
+Time Complexity : O(n)
+Space Complexity: O(1)
+****************************************************************************************************************************************************************/
 
-#  #  two pointer approach
-
-time complexity: O(n)
-space complexity:O(1)
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 
 class Solution {
 public:
     bool isPalindrome(ListNode* head)
-     {
+    {
+        // Empty or single node is always palindrome
+        if (head == NULL || head->next == NULL)
+            return true;
 
-       
-        if(head==NULL || head->next==NULL)
-        {
-            return true;                             // single and empty node is always pallindrome.
-        }
-         
-        ListNode *fast=head;
-        ListNode *slow=head;
+        // Step 1: Find middle using slow & fast pointers
+        ListNode* slow = head;
+        ListNode* fast = head;
 
-        while(fast && fast->next)            // use slow and fast to find the mid of linked list.
+        while (fast && fast->next)
         {
-            slow=slow->next;
-            fast=fast->next->next;
-        }
-        
-       
-        if(fast!=NULL)
-        {   
-            slow=slow->next;           // if linked list contain odd element then skip the element.
+            slow = slow->next;
+            fast = fast->next->next;
         }
 
-        ListNode *prevn=NULL;
-        ListNode *fut=NULL;
-                
-         while(slow)              // reverse the second half.
+        // If odd length, skip the middle node
+        if (fast != NULL)
+            slow = slow->next;
+
+        // Step 2: Reverse second half
+        ListNode* prevn = NULL;
+        ListNode* fut = NULL;
+
+        while (slow)
         {
-            fut=slow->next;
-            slow->next=prevn;
-            prevn=slow;
-            slow=fut;
-         }
-    
-          
-        ListNode *head1=prevn;
-        ListNode *head2=head;
+            fut = slow->next;
+            slow->next = prevn;
+            prevn = slow;
+            slow = fut;
+        }
 
-
+        // Step 3: Compare first half and reversed second half
+        ListNode* head1 = prevn;
+        ListNode* head2 = head;
         bool isPalin = true;
 
-     while(head1 != NULL)
-       {
-         if(head1->val != head2->val)       // compare the first and reverse second half.
-         {
-            isPalin = false;
-            break;
-         }
-         head1 = head1->next;
-         head2 = head2->next;
-      }
+        while (head1)
+        {
+            if (head1->val != head2->val)
+            {
+                isPalin = false;
+                break;
+            }
+            head1 = head1->next;
+            head2 = head2->next;
+        }
 
-     
-           // Restore second half
-           
-        ListNode* curr = prevn;          // start of reversed second half
+        // Step 4: Restore the second half (optional but good practice)
+        ListNode* curr = prevn;
         prevn = NULL;
         fut = NULL;
 
-        while(curr)
-           {
-             fut = curr->next;
-             curr->next = prevn;
-             prevn = curr;
+        while (curr)
+        {
+            fut = curr->next;
+            curr->next = prevn;
+            prevn = curr;
             curr = fut;
-           }
+        }
 
-     return isPalin;
-
-     }
-
-    
+        return isPalin;
+    }
 };
 
-
-recursion
-time complexity:O(n)
-space complexuty:O(n)
-
+/****************************************************************************************************************************************************************
+RECURSION APPROACH
+****************************************************************************************************************************************************************
+Time Complexity : O(n)
+Space Complexity: O(n)  // recursion stack
+****************************************************************************************************************************************************************/
 
 class Solution {
 public:
-    ListNode* front;  // pointer starting from head
+    ListNode* front;   // pointer starting from head
 
-    bool isPalindrome(ListNode* head) {
-        front = head;           // initialize front pointer
-        return check(head);     // start recursion
+    bool isPalindrome(ListNode* head)
+    {
+        front = head;
+        return check(head);
     }
 
 private:
-    bool check(ListNode* current) {
-        if (!current)           // base case: end of list
+    bool check(ListNode* current)
+    {
+        if (!current)                 // base case
             return true;
 
-        // Recurse to the end first
-        if (!check(current->next)) // early exit if deeper nodes are not palindrome
+        // Recurse till end
+        if (!check(current->next))
             return false;
 
-        // Compare mirrored nodes
+        // Compare symmetric nodes
         if (current->val != front->val)
             return false;
 
         // Move front pointer forward
         front = front->next;
-         return true;
+        return true;
     }
 };
