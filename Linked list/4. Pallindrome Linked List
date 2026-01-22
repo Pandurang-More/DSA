@@ -93,30 +93,29 @@ Space Complexity: O(n)   // recursion stack
 
 class Solution {
 public:
-    ListNode* front;   // pointer starting from head
+    ListNode* left;   // pointer from start
 
-    bool isPalindrome(ListNode* head)
-    {
-        front = head;
-        return check(head);
+    bool isPalindrome(ListNode* head) {
+        left = head;              // start from first node
+        return helper(head);
     }
 
-private:
-    bool check(ListNode* current)
-    {
-        if (!current)                 // base case
+    bool helper(ListNode* right) {
+        // when we reach end of list
+        if (right == NULL)
             return true;
 
-        // Recurse till end
-        if (!check(current->next))
+        // go to last node
+        if (helper(right->next) == false)
             return false;
 
-        // Compare symmetric nodes
-        if (current->val != front->val)
+        // compare left and right values
+        if (left->val != right->val)
             return false;
 
-        // Move front pointer forward
-        front = front->next;
+        // move left pointer forward
+        left = left->next;
+
         return true;
     }
 };
