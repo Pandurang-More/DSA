@@ -1,14 +1,15 @@
+/****************************************************************************************
 Input: head = [1,2,6,3,4,5,6], val = 6
 Output: [1,2,3,4,5]
-Example 2:
 
+Example 2:
 Input: head = [], val = 1
 Output: []
-Example 3:
 
+Example 3:
 Input: head = [7,7,7,7], val = 7
 Output: []
-
+****************************************************************************************/
 
 /**
  * Definition for singly-linked list.
@@ -23,42 +24,41 @@ Output: []
 
 tc is O(n)
 sc is O(1)
+
 class Solution 
 {
 public:
     ListNode* removeElements(ListNode* head, int val)
-{
-        
-    while(head!=NULL && head->val==val)  // deletion for first node
     {
-      ListNode *temp=head;
-      head=head->next;
-      delete temp;
+        while (head != NULL && head->val == val)  // deletion for first node
+        {
+            ListNode* temp = head;
+            head = head->next;
+            delete temp;
+        }
+
+        if (!head)         // if list is empty.
+            return head;
+
+        ListNode* current = head;
+        while (current->next != NULL)
+        {
+            if (current->next->val == val)
+            {
+                ListNode* temp1 = current->next;
+                current->next = current->next->next;
+                delete temp1;
+            }
+            else
+                current = current->next;
+        }
+        return head;
     }
- 
-    if(!head)         // if list is empty.
-    return head;
-
-
-   ListNode *current=head;
-   while(current->next !=NULL)
-   {
-      if(current->next->val==val)
-         {
-           ListNode *temp1=current->next;
-           current->next=current->next->next;
-           delete temp1;
-         }
-     else
-         current=current->next;
-   }
-      return head;      
-}
-
 };
 
-
-  ###   recursive method:
+/****************************************************************************************
+### recursive method:
+****************************************************************************************
 
 tc and sc is O(n)
 
@@ -66,20 +66,19 @@ class Solution
 {
 public:
     ListNode* removeElements(ListNode* head, int val)
-{
-      if(!head) return head; // base case if ll is empty
+    {
+        if (!head) return head;   // base case if ll is empty
 
-      head->next=removeElements(head->next,val);  
-  // unwinding 
-      if(head->val==val) // node found
-      {
-        ListNode *temp=head->next;
-        delete head;
-        return temp;
-      }
+        head->next = removeElements(head->next, val);
+        // unwinding
 
-      return head;  // node not found
-     
-}
+        if (head->val == val)     // node found
+        {
+            ListNode* temp = head->next;
+            delete head;
+            return temp;
+        }
 
+        return head;              // node not found
+    }
 };
