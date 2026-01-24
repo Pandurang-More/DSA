@@ -62,3 +62,34 @@ public:
         return right;                          // largest element possible for not perfect square.
     }
 };
+
+Newton’s Method (Babylonian Method)
+
+loglogn
+
+
+
+
+class Solution {
+public:
+    int mySqrt(int x) {
+
+        // if number is 0, square root is 0
+        if (x == 0)
+            return 0;
+
+        // start by assuming the answer is x itself
+        long long guess = x;
+
+        // keep improving the guess
+        while (guess * guess > x) {
+
+            // take average of guess and x/guess
+            guess = (guess + x / guess) / 2;
+        }
+
+        // final guess is the answer
+        return guess;
+    }
+};
+
