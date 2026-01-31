@@ -1,0 +1,101 @@
+/********************************************************************************************
+INSERT GREATEST COMMON DIVISORS IN LINKED LIST
+********************************************************************************************
+
+Given the head of a linked list where each node contains an integer value.
+
+Between every pair of adjacent nodes, insert a new node with a value equal to the
+greatest common divisor (GCD) of them.
+
+Return the linked list after insertion.
+
+The greatest common divisor of two numbers is the largest positive integer that
+evenly divides both numbers.
+
+--------------------------------------------------------------------------------------------
+Example 1:
+
+Input:  head = [18,6,10,3]
+Output: [18,6,6,2,10,1,3]
+
+Explanation:
+- Insert gcd(18, 6) = 6
+- Insert gcd(6, 10) = 2
+- Insert gcd(10, 3) = 1
+
+--------------------------------------------------------------------------------------------
+Example 2:
+
+Input:  head = [7]
+Output: [7]
+
+--------------------------------------------------------------------------------------------
+Constraints:
+- Number of nodes is in the range [1, 5000]
+- 1 <= Node.val <= 1000
+********************************************************************************************/
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+
+
+/********************************************************************************************
+ITERATIVE APPROACH
+********************************************************************************************/
+
+class Solution {
+public:
+    ListNode* insertGreatestCommonDivisors(ListNode* head) 
+    {
+        if (head == NULL || head->next == NULL)
+            return head;
+
+        ListNode* curr = head;
+        ListNode* fut  = curr->next;
+
+        while (fut != NULL)
+        {
+            int g = __gcd(curr->val, fut->val);
+            ListNode* gcd = new ListNode(g);
+
+            curr->next = gcd;
+            gcd->next  = fut;
+
+            curr = fut;
+            fut  = fut->next;
+        }
+        return head;
+    }
+};
+
+
+/********************************************************************************************
+RECURSIVE APPROACH
+********************************************************************************************/
+
+class Solution {
+public:
+    ListNode* insertGreatestCommonDivisors(ListNode* head) 
+    {
+        if (head == NULL || head->next == NULL)
+            return head;
+
+        ListNode* temp = insertGreatestCommonDivisors(head->next);
+
+        ListNode* gcdN = new ListNode(__gcd(head->val, head->next->val));
+
+        gcdN->next = temp;
+        head->next = gcdN;
+
+        return head;
+    }
+};
