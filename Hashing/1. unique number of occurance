@@ -1,0 +1,97 @@
+/****************************************************************************************
+UNIQUE NUMBER OF OCCURRENCES
+****************************************************************************************
+
+Given an array of integers arr, return true if the number of occurrences of each value
+in the array is unique. Otherwise, return false.
+
+----------------------------------------------------------------------------------------
+Example 1:
+Input:  arr = [1,2,2,1,1,3]
+Output: true
+
+Explanation:
+1 → 3 times  
+2 → 2 times  
+3 → 1 time  
+(All frequencies are unique)
+
+----------------------------------------------------------------------------------------
+Example 2:
+Input:  arr = [1,2]
+Output: false
+
+----------------------------------------------------------------------------------------
+Example 3:
+Input:  arr = [-3,0,1,-3,1,1,1,-3,10,0]
+Output: true
+
+----------------------------------------------------------------------------------------
+Constraints:
+- 1 <= arr.length <= 1000
+- -1000 <= arr[i] <= 1000
+****************************************************************************************/
+
+
+/****************************************************************************************
+APPROACH 1: HASH MAP + HASH SET
+Time Complexity : O(n)
+Space Complexity: O(n)
+****************************************************************************************/
+
+class Solution {
+public:
+    bool uniqueOccurrences(vector<int>& arr) 
+    {
+        unordered_map<int, int> mp;
+
+        for (auto &x : arr)
+        {
+            mp[x]++;
+        }
+
+        unordered_set<int> st;
+
+        for (auto &it : mp)
+        {
+            int freq = it.second;
+
+            if (st.find(freq) != st.end())
+                return false;
+
+            st.insert(freq);
+        }
+
+        return true;
+    }
+};
+
+
+/****************************************************************************************
+APPROACH 2: FREQUENCY ARRAY + SORTING
+Time Complexity : O(n log n)
+Space Complexity: O(1)   // fixed-size array
+****************************************************************************************/
+
+class Solution {
+public:
+    bool uniqueOccurrences(vector<int>& arr) 
+    {
+        vector<int> vec(2001, 0);
+
+        for (int &it : arr)
+        {
+            vec[it + 1000]++;
+        }
+
+        sort(vec.begin(), vec.end());
+
+        for (int i = 1; i < 2001; i++)
+        {
+            if (vec[i] != 0 && vec[i] == vec[i - 1])
+                return false;
+        }
+
+        return true;
+    }
+};
