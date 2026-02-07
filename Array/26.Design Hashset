@@ -1,0 +1,118 @@
+/****************************************************************************************
+DESIGN HASHSET
+****************************************************************************************
+
+Implement a HashSet with the following operations:
+
+- void add(key)       → Inserts the value key into the HashSet.
+- void remove(key)    → Removes the value key if it exists.
+- bool contains(key)  → Returns true if key exists, otherwise false.
+
+----------------------------------------------------------------------------------------
+Example:
+Input:
+["MyHashSet","add","add","contains","contains","add","contains","remove","contains"]
+[[],[1],[2],[1],[3],[2],[2],[2],[2]]
+
+Output:
+[null,null,null,true,false,null,true,null,false]
+****************************************************************************************/
+
+
+/****************************************************************************************
+APPROACH 1 : DIRECT ADDRESS TABLE (BOOLEAN ARRAY)
+----------------------------------------------------------------------------------------
+Idea:
+- Keys range from 0 to 10^6
+- Use a boolean vector to mark presence
+
+Time Complexity:
+add / remove / contains → O(1)
+
+Space Complexity:
+O(10^6)
+****************************************************************************************/
+
+class MyHashSet {
+public:
+    vector<bool> vec;
+
+    MyHashSet() 
+    {
+        vec.resize(1000001, false);
+    }
+    
+    void add(int key) 
+    {
+        vec[key] = true;
+    }
+    
+    void remove(int key) 
+    {
+        vec[key] = false;
+    }
+    
+    bool contains(int key) 
+    {
+        return vec[key];
+    }
+};
+
+
+/****************************************************************************************
+APPROACH 2 : HASHING USING SEPARATE CHAINING (LIST BUCKETS)
+----------------------------------------------------------------------------------------
+Idea:
+- Use modulo hashing
+- Handle collisions using linked list
+
+Time Complexity:
+Average → O(1)
+Worst   → O(n)
+
+Space Complexity:
+O(n)
+****************************************************************************************/
+
+class MyHashSet {
+public:
+    int m;
+    vector<list<int>> buckets;
+
+    int getindex(int key)
+    {
+        return key % m;
+    }
+
+    MyHashSet() 
+    {
+        m = 15000;
+        buckets = vector<list<int>>(m, list<int>{});
+    }
+    
+    void add(int key) 
+    {
+        int index = getindex(key);
+        auto it = find(buckets[index].begin(), buckets[index].end(), key);
+
+        if (it == buckets[index].end())
+            buckets[index].push_back(key);
+    }
+    
+    void remove(int key) 
+    {
+        int index = getindex(key);
+        auto it = find(buckets[index].begin(), buckets[index].end(), key);
+
+        if (it != buckets[index].end())
+            buckets[index].erase(it);
+    }
+    
+    bool contains(int key) 
+    {
+        int index = getindex(key);
+        auto it = find(buckets[index].begin(), buckets[index].end(), key);
+
+        return it != buckets[index].end();
+    }
+};
