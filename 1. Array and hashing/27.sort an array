@@ -1,0 +1,99 @@
+/****************************************************************************************************
+SORT AN ARRAY USING MERGE SORT
+****************************************************************************************************
+
+Given an array of integers nums, sort the array in ascending order and return it.
+
+You must solve the problem:
+- Without using any built-in sorting functions
+- Time Complexity  : O(n log n)
+- Space Complexity : As small as possible
+
+----------------------------------------------------------------------------------------------------
+Example 1:
+Input  : nums = [5,2,3,1]
+Output : [1,2,3,5]
+
+----------------------------------------------------------------------------------------------------
+Example 2:
+Input  : nums = [5,1,1,2,0,0]
+Output : [0,0,1,1,2,5]
+
+----------------------------------------------------------------------------------------------------
+Constraints:
+1 <= nums.length <= 5 * 10^4
+-5 * 10^4 <= nums[i] <= 5 * 10^4
+****************************************************************************************************/
+
+class Solution {
+public:
+
+    /************************************************************************************************
+    MERGE TWO SORTED HALVES
+    ************************************************************************************************/
+    void combine(vector<int>& arr, int start, int mid, int end)
+    {
+        vector<int> temp(end - start + 1);
+
+        int index = 0;
+        int left  = start;
+        int right = mid + 1;
+
+        // Merge both halves
+        while (left <= mid && right <= end)
+        {
+            if (arr[left] <= arr[right])
+            {
+                temp[index++] = arr[left++];
+            }
+            else
+            {
+                temp[index++] = arr[right++];
+            }
+        }
+
+        // Remaining left half
+        while (left <= mid)
+        {
+            temp[index++] = arr[left++];
+        }
+
+        // Remaining right half
+        while (right <= end)
+        {
+            temp[index++] = arr[right++];
+        }
+
+        // Copy back to original array
+        index = 0;
+        while (start <= end)
+        {
+            arr[start++] = temp[index++];
+        }
+    }
+
+    /************************************************************************************************
+    MERGE SORT FUNCTION
+    ************************************************************************************************/
+    void mergesort(vector<int>& arr, int start, int end)
+    {
+        if (start == end)
+            return;
+
+        int mid = start + (end - start) / 2;
+
+        mergesort(arr, start, mid);       // Sort left half
+        mergesort(arr, mid + 1, end);     // Sort right half
+
+        combine(arr, start, mid, end);    // Merge both halves
+    }
+
+    /************************************************************************************************
+    MAIN FUNCTION
+    ************************************************************************************************/
+    vector<int> sortArray(vector<int>& nums)
+    {
+        mergesort(nums, 0, nums.size() - 1);
+        return nums;
+    }
+};
