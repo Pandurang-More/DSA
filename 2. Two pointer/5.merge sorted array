@@ -1,4 +1,4 @@
-Merge Sorted Array
+MERGE SORTED ARRAY
 ────────────────────────────────────────────────────────────────────────────────────────
 
 You are given two integer arrays nums1 and nums2,
@@ -68,9 +68,9 @@ class Solution
 public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n)
     {
-        int p1 = m - 1;    // pointer for nums1 last valid element
-        int p2 = n - 1;    // pointer for nums2 last element
-        int p  = m + n - 1;
+        int p1 = m - 1;        // pointer for nums1 last valid element
+        int p2 = n - 1;        // pointer for nums2 last element
+        int p  = m + n - 1;    // pointer for final merged position
 
         while (p1 >= 0 && p2 >= 0)
         {
