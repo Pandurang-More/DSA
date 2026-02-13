@@ -1,0 +1,80 @@
+CONTAINER WITH MOST WATER
+────────────────────────────────────────────────────────────────────────────────────────
+
+You are given an integer array height of length n.  
+There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+
+Find two lines that together with the x-axis form a container such that the container contains the most water.
+
+Return the maximum amount of water a container can store.
+
+NOTE:
+You may not slant the container.
+
+
+EXAMPLE 1
+────────────────────────────────────────────────────────────────────────────────────────
+Input:  height = [1,8,6,2,5,4,8,3,7]
+Output: 49
+
+Explanation:
+The max area is formed between height[1] = 8 and height[8] = 7  
+Width = 8 - 1 = 7  
+Height = min(8,7) = 7  
+Area = 7 × 7 = 49
+
+
+EXAMPLE 2
+────────────────────────────────────────────────────────────────────────────────────────
+Input:  height = [1,1]
+Output: 1
+
+
+CONSTRAINTS
+────────────────────────────────────────────────────────────────────────────────────────
+n == height.length  
+2 <= n <= 10⁵  
+0 <= height[i] <= 10⁴  
+
+
+APPROACH (TWO POINTER)
+────────────────────────────────────────────────────────────────────────────────────────
+1. Place one pointer at start (left)  
+2. Place one pointer at end (right)  
+3. Calculate area using:
+      min(height[left], height[right]) × (right - left)
+4. Update maximum area
+5. Move pointer with smaller height
+6. Continue until left < right
+
+
+TIME COMPLEXITY : O(n)  
+SPACE COMPLEXITY : O(1)
+
+
+CODE
+────────────────────────────────────────────────────────────────────────────────────────
+
+class Solution 
+{
+public:
+    int maxArea(vector<int>& height) 
+    {
+        int left = 0;
+        int right = height.size() - 1;
+        int maxarea = 0;
+
+        while(left < right)
+        {
+            int currArea = min(height[left], height[right]) * (right - left);
+            maxarea = max(maxarea, currArea);
+
+            if(height[left] < height[right])
+                left++;
+            else
+                right--;
+        }
+
+        return maxarea;
+    }
+};
