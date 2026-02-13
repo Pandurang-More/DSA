@@ -1,39 +1,63 @@
+FIND 4 NUMBERS WITH GIVEN SUM
+────────────────────────────────────────────────────────────────────────────────────────
+
+Given an array A of size n and an integer X,
+check whether there exist four numbers whose sum equals X.
+
+
+APPROACH
+────────────────────────────────────────────────────────────────────────────────────────
+1. Sort the array (Bubble Sort used here)
+2. Fix first two elements using two loops
+3. Use two pointer technique for remaining two elements
+4. If sum equals X → return true
+5. Otherwise return false
+
+
+Time Complexity : O(n³)
+Space Complexity : O(1)
+
+
+CODE
+────────────────────────────────────────────────────────────────────────────────────────
+
 // User function Template for C++
 
 bool find4Numbers(int A[], int n, int X) 
 {
+    // Bubble Sort
+    for(int i = 0; i < n - 1; i++)
+    {  
+        for(int j = 0; j < n - i - 1; j++)
+        {
+            if(A[j] > A[j + 1])
+                swap(A[j], A[j + 1]);
+        }
+    }
      
-     for(int i=0;i<n-1;i++)
-     {  
-         for(int j=0;j<n-i-1;j++)
-         {
-             if(A[j]>A[j+1])
-             swap(A[j],A[j+1]);
-             
-         }
-     }
-     
-     for(int i=0;i<n-3;i++)
+    // Fix first two elements
+    for(int i = 0; i < n - 3; i++)
     {
-         for(int j=i+1;j<n-2;j++)
-         {
-             int ans=X-(A[j]+A[i]);
-             int start=j+1, end=n-1;
-             while(start<end)
-              {
-                 if(A[start]+A[end]==ans)
-                 
-                  return true;
-                  else if(A[start]+A[end]<ans)
-                  start++;
-                  else
-                  end--;
-              }
-            
-         }
-     }
+        for(int j = i + 1; j < n - 2; j++)
+        {
+            int remaining = X - (A[i] + A[j]);
+
+            int start = j + 1;
+            int end = n - 1;
+
+            while(start < end)
+            {
+                if(A[start] + A[end] == remaining)
+                    return true;
+
+                else if(A[start] + A[end] < remaining)
+                    start++;
+
+                else
+                    end--;
+            }
+        }
+    }
+
     return false;    
 }
-
-
-Time complexity 0(n*n*n)
