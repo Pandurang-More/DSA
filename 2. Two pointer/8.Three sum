@@ -1,0 +1,87 @@
+TRIPLET SUM IN ARRAY
+────────────────────────────────────────────────────────────────────────────────────────
+
+Given an array arr and a target value,
+check whether there exists any triplet whose sum equals target.
+
+
+BRUTE FORCE APPROACH
+────────────────────────────────────────────────────────────────────────────────────────
+• Check all possible triplets
+• Three nested loops
+
+Time Complexity : O(n³)
+Space Complexity : O(1)
+
+
+class Solution {
+public:
+    bool hasTripletSum(vector<int> &arr, int target)
+    {
+        int n = arr.size();
+
+        for (int i = 0; i < n - 2; i++)
+        {
+            for (int j = i + 1; j < n - 1; j++)
+            {
+                for (int k = j + 1; k < n; k++)
+                {
+                    if (arr[i] + arr[j] + arr[k] == target)
+                        return true;
+                }
+            }
+        }
+
+        return false;
+    }
+};
+
+
+BETTER APPROACH (Binary Search + Two Sum Idea)
+────────────────────────────────────────────────────────────────────────────────────────
+• Fix one element
+• Use binary search for remaining two
+• Time Complexity : O(n² log n)
+
+
+OPTIMIZED APPROACH – SORT + TWO POINTER
+────────────────────────────────────────────────────────────────────────────────────────
+• Sort the array
+• Fix one element
+• Use two pointer to find remaining pair
+
+Time Complexity : O(n²)
+Space Complexity : O(1)
+
+
+class Solution {
+public:
+    bool hasTripletSum(vector<int> &arr, int target)
+    {
+        sort(arr.begin(), arr.end());
+        int n = arr.size();
+
+        for (int i = 0; i < n - 2; i++)
+        {
+            int remaining = target - arr[i];
+            int start = i + 1;
+            int end = n - 1;
+
+            while (start < end)
+            {
+                int sum = arr[start] + arr[end];
+
+                if (sum == remaining)
+                    return true;
+
+                else if (sum < remaining)
+                    start++;
+
+                else
+                    end--;
+            }
+        }
+
+        return false;
+    }
+};
