@@ -1,0 +1,75 @@
+MERGE STRINGS ALTERNATELY
+────────────────────────────────────────────────────────────────────────────────────────
+
+You are given two strings word1 and word2.
+
+Merge the strings by adding letters in alternating order,
+starting with word1.
+
+If a string is longer than the other,
+append the additional letters onto the end of the merged string.
+
+Return the merged string.
+
+
+Example 1:
+Input:  word1 = "abc", word2 = "pqr"
+Output: "apbqcr"
+
+Example 2:
+Input:  word1 = "ab", word2 = "pqrs"
+Output: "apbqrs"
+
+Example 3:
+Input:  word1 = "abcd", word2 = "pq"
+Output: "apbqcd"
+
+
+Constraints:
+- 1 <= word1.length, word2.length <= 100
+- word1 and word2 consist of lowercase English letters
+
+
+Approach:
+────────────────────────────────────────────────────────────────────────────────────────
+1. Use two pointers i and j
+2. Add characters alternately from both strings
+3. Append remaining characters from longer string
+────────────────────────────────────────────────────────────────────────────────────────
+
+
+class Solution {
+public:
+    string mergeAlternately(string word1, string word2) 
+    {
+        string merge;
+        int m = word1.size();
+        int n = word2.size();
+
+        int i = 0;
+        int j = 0;
+
+        while(i < m && j < n)
+        {
+            merge.push_back(word1[i]);
+            i++;
+
+            merge.push_back(word2[j]);
+            j++;
+        }
+
+        while(i < m)
+        {
+            merge.push_back(word1[i]);
+            i++;
+        }
+
+        while(j < n)
+        {
+            merge.push_back(word2[j]);
+            j++;
+        }
+
+        return merge;
+    }
+};
