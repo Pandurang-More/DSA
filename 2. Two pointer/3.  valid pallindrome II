@@ -1,32 +1,52 @@
-680. Valid Palindrome II
-Solved
-Easy
-Topics
-premium lock icon
-Companies
+VALID PALINDROME II
+────────────────────────────────────────────────────────────────────────────────────────
 
-Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+Given a string s, return true if the s can be palindrome
+after deleting at most ONE character.
 
 
-Example 1:
-Input: s = "aba"
+EXAMPLE 1
+────────────────────────────────────────────────────────────────────────────────────────
+Input:  s = "aba"
 Output: true
 
-Example 2:
-Input: s = "abca"
-Output: true
-Explanation: You could delete the character 'c'.
 
-Example 3:
-Input: s = "abc"
+EXAMPLE 2
+────────────────────────────────────────────────────────────────────────────────────────
+Input:  s = "abca"
+Output: true
+Explanation:
+Delete 'c' → "aba" which is palindrome.
+
+
+EXAMPLE 3
+────────────────────────────────────────────────────────────────────────────────────────
+Input:  s = "abc"
 Output: false
 
 
-Constraints:
+CONSTRAINTS
+────────────────────────────────────────────────────────────────────────────────────────
 1 <= s.length <= 10^5
 s consists of lowercase English letters.
 
 
+APPROACH (TWO POINTER + ONE SKIP)
+────────────────────────────────────────────────────────────────────────────────────────
+1. Use two pointers i (start) and j (end).
+2. If characters match → move both pointers.
+3. If mismatch occurs:
+      try skipping left character  OR  skipping right character
+      check if remaining substring is palindrome.
+4. If any works → true.
+
+
+TIME COMPLEXITY : O(n)  
+SPACE COMPLEXITY : O(1)
+
+
+CODE
+────────────────────────────────────────────────────────────────────────────────────────
 
 class Solution {
 public:
