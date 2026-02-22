@@ -1,0 +1,75 @@
+LONGEST REPEATING CHARACTER REPLACEMENT
+────────────────────────────────────────────────────────────────────────────────────────
+
+You are given a string s and an integer k.
+
+You can change any character into any other uppercase character
+at most k times.
+
+Return the length of the longest substring that can be made
+of the same character after at most k replacements.
+
+
+EXAMPLE 1
+────────────────────────────────────────────────────────────────────────────────────────
+Input:  s = "ABAB", k = 2
+Output: 4
+
+
+EXAMPLE 2
+────────────────────────────────────────────────────────────────────────────────────────
+Input:  s = "AABABBA", k = 1
+Output: 4
+Explanation: Replace one 'A' → "AABBBBA" → longest "BBBB"
+
+
+CONSTRAINTS
+────────────────────────────────────────────────────────────────────────────────────────
+1 <= s.length <= 10^5
+s contains only uppercase letters
+0 <= k <= s.length
+
+
+APPROACH — SLIDING WINDOW + MAX FREQUENCY
+────────────────────────────────────────────────────────────────────────────────────────
+• Keep a window [left → right]
+• Track frequency of each character
+• Track maxFreq = highest frequency in current window
+• If window size − maxFreq > k → shrink from left
+• Otherwise update answer
+
+WHY (window − maxFreq)?
+→ These are characters we must replace.
+→ If replacements needed > k → window invalid.
+
+
+Time  Complexity : O(n)
+Space Complexity : O(1)
+
+
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+
+        vector<int> freq(26,0);
+        int left = 0;
+        int maxFreq = 0;
+        int ans = 0;
+
+        for(int right = 0; right < s.size(); right++)
+        {
+            freq[s[right]-'A']++;
+            maxFreq = max(maxFreq, freq[s[right]-'A']);
+
+            while((right-left+1) - maxFreq > k)
+            {
+                freq[s[left]-'A']--;
+                left++;
+            }
+
+            ans = max(ans, right-left+1);
+        }
+
+        return ans;
+    }
+};
