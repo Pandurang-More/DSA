@@ -1,0 +1,108 @@
+PERMUTATION IN STRING  (Check Inclusion)
+────────────────────────────────────────────────────────────────────────────────────────
+
+Given two strings s1 and s2, return true if s2 contains a permutation of s1.
+Return false otherwise.
+
+A permutation means same characters with same frequency,
+but order can be different.
+
+
+EXAMPLE 1
+────────────────────────────────────────────────────────────────────────────────────────
+Input:  s1 = "ab", s2 = "eidbaooo"
+Output: true
+Explanation: substring "ba" is a permutation of "ab"
+
+
+EXAMPLE 2
+────────────────────────────────────────────────────────────────────────────────────────
+Input:  s1 = "ab", s2 = "eidboaoo"
+Output: false
+
+
+CONSTRAINTS
+────────────────────────────────────────────────────────────────────────────────────────
+1 <= s1.length, s2.length <= 10^4
+Only lowercase English letters
+
+
+────────────────────────────────────────────────────────────────────────────────────────
+BRUTE FORCE (YOUR CODE — KEEPING CONTENT, CLEAN FORMAT)
+────────────────────────────────────────────────────────────────────────────────────────
+
+Time Complexity : O(26 * n * k)
+Space Complexity: O(1)
+
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2)
+    {
+        vector<int> temp(26,0);
+        int k = s1.size();
+
+        for(int i = 0; i < k; i++)
+            temp[s1[i]-'a']++;
+
+        for(int i = 0; i < s2.length(); i++)
+        {
+            int wnidx = 0;
+            int idx = i;
+            vector<int> temp1(26,0);
+
+            while(wnidx < k && idx < s2.length())
+            {
+                temp1[s2[idx]-'a']++;
+                wnidx++;
+                idx++;
+            }
+
+            if(temp == temp1)
+                return true;
+        }
+
+        return false;
+    }
+};
+
+
+────────────────────────────────────────────────────────────────────────────────────────
+OPTIMAL — SLIDING WINDOW (INTERVIEW EXPECTED)
+────────────────────────────────────────────────────────────────────────────────────────
+
+IDEA:
+• Count frequency of s1
+• Maintain window of size k in s2
+• Add right char, remove left char
+• Compare frequency arrays
+
+Time Complexity : O(26 * n) ≈ O(n)
+Space Complexity: O(1)
+
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2)
+    {
+        if(s1.size() > s2.size()) return false;
+
+        vector<int> need(26,0), window(26,0);
+
+        for(char c : s1)
+            need[c-'a']++;
+
+        int k = s1.size();
+
+        for(int i = 0; i < s2.size(); i++)
+        {
+            window[s2[i]-'a']++;
+
+            if(i >= k)
+                window[s2[i-k]-'a']--;
+
+            if(window == need)
+                return true;
+        }
+
+        return false;
+    }
+};
