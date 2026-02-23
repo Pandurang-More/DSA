@@ -1,0 +1,78 @@
+BASEBALL GAME (STACK SIMULATION)
+────────────────────────────────────────────────────────────────────────
+
+You are keeping the scores for a baseball game with strange rules.
+
+At the beginning of the game, you start with an empty record.
+
+You are given a list of strings operations, where operations[i]
+is the ith operation you must apply to the record and is one of:
+
+• Integer x → Record a new score of x  
+• "+"       → Record sum of previous two scores  
+• "D"       → Record double of previous score  
+• "C"       → Remove the previous score  
+
+Return the sum of all the scores after applying operations.
+
+
+Example 1:
+Input: ops = ["5","2","C","D","+"]
+Output: 30
+
+
+Example 2:
+Input: ops = ["5","-2","4","C","D","9","+","+"]
+Output: 27
+
+
+Example 3:
+Input: ops = ["1","C"]
+Output: 0
+
+
+Constraints:
+
+1 <= operations.length <= 1000  
+operations[i] is "C", "D", "+", or integer string  
+All operations are valid.
+
+
+
+class Solution {
+public:
+    int calPoints(vector<string>& operations) {
+
+        int record = 0;
+        vector<int> st;
+
+        for(string s : operations)
+        {
+            if(s == "C")
+            {
+                st.pop_back();
+            }
+            else if(s == "+")
+            {
+                int a = st.back();
+                int b = st[st.size()-2];
+                st.push_back(a + b);
+            }
+            else if(s == "D")
+            {
+                st.push_back(2 * st.back());
+            }
+            else
+            {
+                st.push_back(stoi(s));
+            }
+        }
+
+        for(int i : st)
+        {
+            record += i;
+        }
+
+        return record;
+    }
+};
