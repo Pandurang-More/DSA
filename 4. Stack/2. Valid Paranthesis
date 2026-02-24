@@ -1,0 +1,76 @@
+VALID PARENTHESES
+────────────────────────────────────────────────────────────────────────
+
+Given a string s containing just the characters:
+
+'('  ')'  '{'  '}'  '['  ']'
+
+Determine if the input string is valid.
+
+A string is valid if:
+
+• Open brackets must be closed by the same type  
+• Open brackets must be closed in correct order  
+• Every closing bracket has a matching opening bracket  
+
+
+Example 1:
+Input: s = "()"
+Output: true
+
+
+Example 2:
+Input: s = "()[]{}"
+Output: true
+
+
+Example 3:
+Input: s = "(]"
+Output: false
+
+
+Example 4:
+Input: s = "([])"
+Output: true
+
+
+Example 5:
+Input: s = "([)]"
+Output: false
+
+
+Constraints:
+1 <= s.length <= 10^4
+s consists only of '()[]{}'
+
+
+
+class Solution {
+public:
+    bool isValid(string s) 
+    {
+        stack<char> st;
+
+        for(char ch : s)
+        {
+            if(ch=='(' || ch=='[' || ch=='{')
+            {
+                st.push(ch);
+            }
+            else
+            {
+                if(st.empty()) return false;
+
+                char top = st.top();
+                st.pop();
+
+                if(ch=='}' && top!='{' ||
+                   ch==']' && top!='[' ||
+                   ch==')' && top!='(')
+                    return false;
+            }
+        }
+
+        return st.empty();
+    }
+};
