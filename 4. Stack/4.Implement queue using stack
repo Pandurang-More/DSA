@@ -1,0 +1,98 @@
+QUEUE USING TWO STACKS (FIFO)
+────────────────────────────────────────────────────────────────────────
+
+Implement a first in first out (FIFO) queue using only two stacks.
+
+Functions:
+• push(x)  → push element to back
+• pop()    → remove & return front element
+• peek()   → return front element
+• empty()  → return true if queue empty
+
+
+Example:
+Input:
+["MyQueue","push","push","peek","pop","empty"]
+[[],[1],[2],[],[],[]]
+
+Output:
+[null,null,null,1,1,false]
+
+Explanation:
+push(1) → [1]
+push(2) → [1,2]
+peek()  → 1
+pop()   → 1
+empty() → false
+
+
+Constraints:
+Use only stack operations.
+
+
+────────────────────────────────────────────────────────────────────────
+SOLUTION → USING TWO STACKS
+────────────────────────────────────────────────────────────────────────
+
+class MyQueue {
+public:
+   stack<int> input;
+   stack<int> output;
+   int peak = -1;
+
+    MyQueue() {
+    }
+    
+    void push(int x) {
+        if(input.empty())
+        {
+             peak = x;
+        }
+        input.push(x);
+    }
+    
+    int pop() {
+        if(output.empty())
+        {
+           while(!input.empty())       // 0(n) it is amortized it will happen in very rare cases.
+           {
+                output.push(input.top());
+                input.pop();
+           }
+        }
+
+        int val = output.top();     //0(1)
+        output.pop();
+        return val;
+    }
+    
+    int peek() {
+        if(output.empty())
+        {
+            return peak;
+        }
+        else
+        {
+            return output.top();
+        }
+    }
+    
+    bool empty() {
+        if(input.empty() && output.empty())
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+};
+
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue* obj = new MyQueue();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->peek();
+ * bool param_4 = obj->empty();
+ */
