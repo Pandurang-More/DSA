@@ -1,0 +1,68 @@
+DAILY TEMPERATURES
+────────────────────────────────────────────────────────────────────────
+
+Given an array temperatures where:
+
+answer[i] = number of days to wait after day i
+            to get a warmer temperature.
+
+If no warmer day exists → answer[i] = 0
+
+
+Example 1:
+Input:  [73,74,75,71,69,72,76,73]
+Output: [1,1,4,2,1,1,0,0]
+
+
+Example 2:
+Input:  [30,40,50,60]
+Output: [1,1,1,0]
+
+
+Example 3:
+Input:  [30,60,90]
+Output: [1,1,0]
+
+
+Constraints:
+1 <= temperatures.length <= 10^5
+30 <= temperatures[i] <= 100
+
+
+
+────────────────────────────────────────────────────────────────────────
+MONOTONIC STACK APPROACH (O(n))
+────────────────────────────────────────────────────────────────────────
+
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& temperatures) 
+    {   
+        int n = temperatures.size();
+        
+        vector<int> result(n,0);
+        stack<int> st;
+
+        for(int i=n-1;i>=0;i--)
+        {
+            while(!st.empty() && 
+                  temperatures[i] >= temperatures[st.top()])
+            {
+                st.pop();
+            }
+
+            if(st.empty())
+            {
+                result[i] = 0;
+            }
+            else
+            {
+                result[i] = st.top() - i;
+            }
+
+            st.push(i);
+        }
+
+        return result;
+    }
+};
