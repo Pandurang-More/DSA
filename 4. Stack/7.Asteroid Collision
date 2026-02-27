@@ -1,0 +1,93 @@
+ASTEROID COLLISION
+────────────────────────────────────────────────────────────────────────
+
+We are given an array asteroids.
+
+• Absolute value → size
+• Sign:
+    + → moving right
+    - → moving left
+• Same speed
+• Smaller asteroid explodes
+• Same size → both explode
+• Same direction → never collide
+
+
+Example 1:
+Input:  [5,10,-5]
+Output: [5,10]
+
+
+Example 2:
+Input:  [8,-8]
+Output: []
+
+
+Example 3:
+Input:  [10,2,-5]
+Output: [10]
+
+
+Example 4:
+Input:  [3,5,-6,2,-1,4]
+Output: [-6,2,4]
+
+
+Constraints:
+2 <= asteroids.length <= 10^4
+-1000 <= asteroids[i] <= 1000
+asteroids[i] != 0
+
+
+
+────────────────────────────────────────────────────────────────────────
+STACK APPROACH (O(n))
+────────────────────────────────────────────────────────────────────────
+
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+
+        stack<int> st;
+
+        for(int &a : asteroids)
+        {
+            while(!st.empty() && st.top() > 0 && a < 0)
+            { 
+                int sum = a + st.top();
+
+                if(sum < 0)
+                {
+                    st.pop();
+                }
+                else if(sum > 0)
+                {
+                    a = 0;
+                }
+                else
+                {
+                    st.pop();
+                    a = 0;
+                }
+            }
+
+            if(a != 0)
+            {
+                st.push(a);
+            }
+        }
+
+        int s = st.size();
+        vector<int> ans(s);
+        int i = s - 1;
+
+        while(!st.empty())
+        {
+            ans[i] = st.top();
+            st.pop();
+            i--;
+        }
+
+        return ans;
+    }
+};
