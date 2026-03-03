@@ -1,0 +1,90 @@
+DECODE STRING
+────────────────────────────────────────────────────────────────────────
+
+Encoding rule:
+k[encoded_string]
+
+• encoded_string inside [] is repeated k times
+• k is always positive integer
+• input is always valid
+• no extra spaces
+• brackets are well-formed
+• digits only represent repeat count
+
+Output length ≤ 10^5
+
+
+Example 1:
+Input:  "3[a]2[bc]"
+Output: "aaabcbc"
+
+
+Example 2:
+Input:  "3[a2[c]]"
+Output: "accaccacc"
+
+
+Example 3:
+Input:  "2[abc]3[cd]ef"
+Output: "abcabccdcdcdef"
+
+
+Constraints:
+1 <= s.length <= 30
+digits range: [1, 300]
+s contains lowercase letters, digits, '[' , ']'
+
+
+────────────────────────────────────────────────────────────────────────
+STACK APPROACH (O(n))
+────────────────────────────────────────────────────────────────────────
+
+class Solution {
+public:
+    string decodeString(string s) {
+
+        stack<int> countstack;
+        stack<string> stringstack;
+
+        int currnum = 0;
+        string currstr = "";
+
+        for(char ch : s)
+        {
+            if(isdigit(ch))
+            {
+                currnum = currnum * 10 + ch - '0';
+            }
+            else if(ch == '[')
+            {
+                countstack.push(currnum);
+                stringstack.push(currstr);
+                currnum = 0;
+                currstr = "";
+            }
+            else if(ch == ']')
+            {
+                int repeat = countstack.top();
+                countstack.pop();
+
+                string prevstr = stringstack.top();
+                stringstack.pop();
+
+                string temp = "";
+
+                for(int i=0;i<repeat;i++)
+                {
+                    temp += currstr;
+                }
+
+                currstr = prevstr + temp;
+            }
+            else
+            {
+                currstr += ch;
+            }
+        }
+
+        return currstr;
+    }
+};
