@@ -1,0 +1,119 @@
+DELETE NODE IN BST
+────────────────────────────────────────────────────────────────────────
+
+Given a BST root and a key, delete the node with that key.
+
+Steps:
+1) Search for the node
+2) Delete it
+
+Cases while deleting:
+
+1) Node has NO child
+   → return NULL
+
+2) Node has ONE child
+   → return that child
+
+3) Node has TWO children
+   → find inorder successor (minimum in right subtree)
+   → replace node value
+   → delete successor node
+
+
+Example 1:
+
+Input:
+root = [5,3,6,2,4,null,7], key = 3
+
+Output:
+[5,4,6,2,null,null,7]
+
+
+Example 2:
+
+Input:
+root = [5,3,6,2,4,null,7], key = 0
+
+Output:
+[5,3,6,2,4,null,7]
+
+
+Example 3:
+
+Input:
+root = [], key = 0
+
+Output:
+[]
+
+
+Constraints:
+
+0 <= nodes <= 10^4  
+-10^5 <= Node.val <= 10^5  
+All node values unique  
+BST is valid
+
+
+Time Complexity:
+O(height of tree)
+
+
+
+────────────────────────────────────────────────────────────────────────
+RECURSIVE APPROACH
+────────────────────────────────────────────────────────────────────────
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ * };
+ */
+
+class Solution {
+public:
+
+    TreeNode* findmin(TreeNode *root)
+    {
+        while(root->left != NULL)
+        {
+            root = root->left;
+        }
+        return root;
+    }
+
+    TreeNode* deleteNode(TreeNode* root, int key)
+    {
+        if(root == NULL)
+            return NULL;
+
+        if(key < root->val)
+        {
+            root->left = deleteNode(root->left, key);
+        }
+        else if(key > root->val)
+        {
+            root->right = deleteNode(root->right, key);
+        }
+        else
+        {
+            if(root->right == NULL)
+                return root->left;
+
+            if(root->left == NULL)
+                return root->right;
+
+            TreeNode* succsessor = findmin(root->right);
+
+            root->val = succsessor->val;
+
+            root->right = deleteNode(root->right, succsessor->val);
+        }
+
+        return root;
+    }
+};
