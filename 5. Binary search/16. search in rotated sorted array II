@@ -1,0 +1,116 @@
+SEARCH IN ROTATED SORTED ARRAY II (WITH DUPLICATES)
+────────────────────────────────────────────────────────────────────────
+
+Array nums is sorted in non-decreasing order but may contain duplicates.
+
+Before calling the function, the array may be rotated at some pivot.
+
+Example:
+
+Original:
+[0,1,2,4,4,4,5,6,6,7]
+
+After rotation:
+[4,5,6,6,7,0,1,2,4,4]
+
+
+Goal:
+Return true if target exists in nums, otherwise false.
+
+
+
+Example 1:
+
+Input:
+nums = [2,5,6,0,0,1,2]
+target = 0
+
+Output:
+true
+
+
+Example 2:
+
+Input:
+nums = [2,5,6,0,0,1,2]
+target = 3
+
+Output:
+false
+
+
+
+Constraints:
+
+1 <= nums.length <= 5000  
+-10^4 <= nums[i] <= 10^4  
+nums is rotated  
+-10^4 <= target <= 10^4
+
+
+
+Follow-up:
+
+Because duplicates exist, worst-case time complexity may degrade to **O(n)**.
+
+Example case causing degradation:
+[1,1,1,1,1,1,1]
+
+Binary search cannot determine which half is sorted.
+
+
+
+────────────────────────────────────────────────────────────────────────
+MODIFIED BINARY SEARCH WITH DUPLICATES
+────────────────────────────────────────────────────────────────────────
+
+class Solution {
+public:
+    bool search(vector<int>& nums, int target) 
+    {
+        int str = 0;
+        int end = nums.size() - 1;
+
+        while(str <= end)
+        {
+            int mid = str + (end - str) / 2;
+
+            if(nums[mid] == target)
+            {
+                return true;
+            }
+
+            if(nums[str] == nums[mid] && nums[mid] == nums[end])
+            {
+                str++;
+                end--;
+                continue;
+            }
+
+            if(nums[str] <= nums[mid])        // left half sorted
+            {
+                if(nums[str] <= target && target <= nums[mid])
+                {
+                    end = mid - 1;
+                }
+                else
+                {
+                    str = mid + 1;
+                }
+            }
+            else                               // right half sorted
+            {
+                if(nums[mid] <= target && target <= nums[end])
+                {
+                    str = mid + 1;
+                }
+                else
+                {
+                    end = mid - 1;
+                }
+            }
+        }
+
+        return false;
+    }
+};
