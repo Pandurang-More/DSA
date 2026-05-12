@@ -1,0 +1,27 @@
+class Solution {
+public:
+
+     pair<int,int>dfs(TreeNode *node)
+     {
+        if(node ==NULL)
+        return{0,0};
+
+        auto left=dfs(node->left);
+        auto right=dfs(node->right);
+
+        int robnode=node->val+
+        left.second+
+        right.second;
+
+        int skipnode=max(left.first,left.second)+ max(right.first,right.second);
+
+        return {robnode,skipnode};
+
+
+     }
+    int rob(TreeNode* root) {
+        auto ans=dfs(root);
+
+        return max(ans.first,ans.second);
+    }
+};
