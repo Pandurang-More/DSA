@@ -1,0 +1,36 @@
+class Solution {
+public:
+     set<vector<int>>s;
+    void  AllCombination(vector<int>& candidates,int idx,  vector<vector<int>>&ans, vector<int>&combin,int target)
+    {
+          if(idx==candidates.size() || target <0)
+             return;
+          
+          if(target==0)
+            {   if(s.find(combin)==s.end())
+                {
+                ans.push_back(combin);
+                s.insert(combin);
+                return;
+                }
+            }
+           
+           combin.push_back(candidates[idx]);
+        AllCombination(candidates,idx+1,ans,combin,target-candidates[idx]);
+        AllCombination(candidates,idx,ans,combin,target-candidates[idx]);
+        combin.pop_back();
+        AllCombination(candidates,idx+1,ans,combin,target);
+          
+
+    }
+
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>>ans;
+        vector<int>combin;
+        int i=0;
+
+       AllCombination(candidates,0,ans,combin,target);
+
+       return ans;
+    }
+};
