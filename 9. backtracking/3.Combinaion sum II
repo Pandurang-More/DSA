@@ -1,0 +1,40 @@
+class Solution {
+public: 
+     void Allcombi( vector<int>&candidates,int idx, vector<vector<int>>&ans, vector<int>&combin,int target)
+     {
+      
+       if(target==0)
+      { 
+             ans.push_back(combin);
+             
+         return;
+      }
+
+         for(int i=idx;i<candidates.size();i++)
+        {
+            // Skip duplicate elements
+            if(i>idx && candidates[i]==candidates[i-1])
+                continue;
+
+            if(candidates[i]>target)
+                break;
+
+            combin.push_back(candidates[i]);
+
+            Allcombi(candidates,i+1,ans,combin,
+                  target-candidates[i]);
+
+            combin.pop_back();
+        }
+    }
+
+     
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+          vector<vector<int>>ans;
+          vector<int>combin;
+          sort(candidates.begin(),candidates.end());
+          Allcombi(candidates,0,ans,combin,target);
+          return ans;
+
+    }
+};
