@@ -1,0 +1,49 @@
+class Solution {
+public: 
+    bool isvalid(string s)
+    {
+        if(s[0]=='0')
+        return false;
+
+        int val=stoi(s);
+
+        return val<=255;
+    }
+   void solve( string &s,int idx,vector<string>&result,int parts,string curr)
+    {
+        if(idx==s.size() && parts==4)
+        {
+            curr.pop_back();
+            result.push_back(curr);
+            return;
+        }
+        if(parts>4)return;
+        if(idx+1<=s.size())
+        {
+        solve(s,idx+1,result,parts+1,curr+s.substr(idx,1)+".");
+        }
+
+        if(idx+2<=s.size() && isvalid(s.substr(idx,2)) )
+        {
+
+        solve(s,idx+2,result,parts+1,curr+s.substr(idx,2)+".");
+        }
+
+        if(idx+3<=s.size() && isvalid(s.substr(idx,3)))
+        {
+
+        solve(s,idx+3,result,parts+1,curr+s.substr(idx,3)+".");
+        }
+    }
+    vector<string> restoreIpAddresses(string s) {
+         vector<string>result;
+         int parts=0;
+         string curr="";
+         if(s.size()>12)
+         return {};
+
+         solve(s,0,result,parts,curr);
+
+         return result;
+    }
+};
