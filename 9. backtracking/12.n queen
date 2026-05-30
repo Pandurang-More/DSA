@@ -59,3 +59,60 @@ public:
         return result;
     }
 };
+
+
+Approach 2
+
+
+
+class Solution {
+public:
+  vector<vector<string>>result;
+  int N;
+   
+   unordered_set<int>cols;
+   unordered_set<int>dig;
+   unordered_set<int>antidig;
+
+   void solve(vector<string>&board,int row)
+   {
+        if(row>=N)
+        {
+            result.push_back(board);
+            return;
+        }
+
+        for(int col=0;col<N;col++)
+        {
+           int digc=row+col;
+           int antidigc=row-col;
+         
+         if(cols.find(col)!=cols.end() || dig.find(digc)!=dig.end()|| antidig.find(antidigc)!=antidig.end())
+         {
+              continue;
+         }
+
+         cols.insert(col);
+         dig.insert(digc);
+         antidig.insert(antidigc);
+         board[row][col]='Q';
+         solve(board,row+1);
+         
+         cols.erase(col);
+         dig.erase(digc);
+         antidig.erase(antidigc);
+         board[row][col]='.';
+
+
+
+        }
+   }
+    vector<vector<string>> solveNQueens(int n) {
+        N=n;
+        vector<string>board(n,string(n,'.'));
+
+        solve(board,0);
+
+        return result;
+    }
+};
