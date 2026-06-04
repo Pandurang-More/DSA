@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int n;
+    int dp[101];
+
+
+    int solve(vector<int>&nums,int start,int idx)
+    {
+       if(idx==start)
+       {
+        return nums[start];
+       }
+       if(idx<start)return 0;
+       if(dp[idx]!=-1)
+         return dp[idx];
+
+       return dp[idx]=max(solve(nums,start,idx-1),nums[idx]+solve(nums,start,idx-2));
+    }
+
+
+    int rob(vector<int>& nums) {
+        n=nums.size();
+        if(n==1)return nums[0];
+        memset(dp,-1,sizeof(dp));
+        int ans1=solve(nums,0,n-2);
+         memset(dp,-1,sizeof(dp));
+         int ans2=solve(nums,1,n-1);
+
+       return max(ans1,ans2);
+    }
+};
