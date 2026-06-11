@@ -82,12 +82,12 @@ public:
         for(int i=1;i<strs.size();i++)
         {
             while(strs[i].find(prefix) != 0)
-            // strs[i].find(prefix) == 0 → string starts with prefix
-            // strs[i].find(prefix) != 0 → string does not start with prefix
             {
                 prefix = prefix.substr(0, prefix.size() - 1); // shrink prefix
                 if(prefix.empty()) return "";
-            }
+            }                                                         // strs[i].find(prefix) == 0 → string starts with prefix
+                                                                     // strs[i].find(prefix) != 0 → string does not start with prefix
+             
         }
           
         return prefix;
