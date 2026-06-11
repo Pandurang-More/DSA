@@ -25,22 +25,29 @@ class Solution
 public:
     vector<string> stringMatching(vector<string>& words)
     {
-         vector<string>ans;
-        for(int i=0;i<words.size();i++)
-           {
-            for(int j=0;j<words.size();j++)
-                {    
-                
-                if(i!=j && words[i].find(words[j]) != string::npos)
-                    { //"If words[j] is found inside words[i], and they are not the same string, then do somethi"
-                   ans.push_back(words[j]);  
-                    }
+        vector<string> ans; // Stores all strings that are substrings of another string
+
+        for (int i = 0; i < words.size(); i++)
+        {
+            for (int j = 0; j < words.size(); j++)
+            {
+                // Check different strings only
+                // If words[j] is found inside words[i]
+                if (i != j && words[i].find(words[j]) != string::npos)
+                {
+                    ans.push_back(words[j]); // Add substring to answer
                 }
-           }
-         sort(ans.begin(), ans.end());
+            }
+        }
+
+        // Sort so duplicate strings become adjacent
+        sort(ans.begin(), ans.end());
+
+        // Remove duplicate entries
+        // unique() shifts duplicates to the end and returns
+        // iterator pointing to the new logical end
         ans.erase(unique(ans.begin(), ans.end()), ans.end());
-      // unique(begin, end) Reorders vector so duplicates go to the end Returns iterator to new logical end
-      //erase(it, end) Physically deletes elements in that range Shrinks vector size
+
         return ans;
     }
 };
