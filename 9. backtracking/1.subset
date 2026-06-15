@@ -48,3 +48,5 @@ public:
         return allsubset;
     }
 };
+TC:0(2^n)// every element has two possibility take or not take;
+SC: O(n*2^n)
