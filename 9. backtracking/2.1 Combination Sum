@@ -52,60 +52,35 @@ Backtracking
 
 class Solution {
 public:
+    vector<vector<int>>ans;
     set<vector<int>> s;
 
-    void AllCombination(vector<int>& candidates,
-                        int idx,
-                        vector<vector<int>>& ans,
-                        vector<int>& combin,
-                        int target)
+    void AllCombination(vector<int>& candidates, int idx,vector<int>& combin, int target)
     {
-        if(idx==candidates.size() || target<0)
+        if (idx == candidates.size() || target < 0)
             return;
 
-        if(target==0)
+        if (target == 0)
         {
-            if(s.find(combin)==s.end())
+            if (s.find(combin) == s.end())
             {
                 ans.push_back(combin);
                 s.insert(combin);
-                return;
             }
+            return;
         }
 
         combin.push_back(candidates[idx]);
-
-        AllCombination(candidates,
-                       idx+1,
-                       ans,
-                       combin,
-                       target-candidates[idx]);
-
-        AllCombination(candidates,
-                       idx,
-                       ans,
-                       combin,
-                       target-candidates[idx]);
-
+        AllCombination(candidates,idx,combin,target - candidates[idx]);
         combin.pop_back();
-
-        AllCombination(candidates,
-                       idx+1,
-                       ans,
-                       combin,
-                       target);
+        AllCombination(candidates,idx + 1,combin,target);
     }
 
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target)
+    vector<vector<int>> combinationSum(vector<int>& candidates,int target)
     {
-        vector<vector<int>> ans;
-        vector<int> combin;
-
-        AllCombination(candidates,0,ans,combin,target);
-
+        vector<int>combin;
+        AllCombination(candidates,0,combin,target);
         return ans;
     }
 };
 
-====================================================
-*/
