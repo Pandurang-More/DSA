@@ -1,0 +1,115 @@
+/*
+====================================================
+
+300. Longest Increasing Subsequence
+
+Given an integer array nums, return the length of the longest strictly increasing subsequence.
+
+Example 1:
+
+Input: nums = [10,9,2,5,3,7,101,18]
+Output: 4
+
+Explanation:
+The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
+
+Example 2:
+
+Input: nums = [0,1,0,3,2,3]
+Output: 4
+
+Example 3:
+
+Input: nums = [7,7,7,7,7,7,7]
+Output: 1
+
+Constraints:
+
+1 <= nums.length <= 2500
+-10^4 <= nums[i] <= 10^4
+
+Follow up:
+Can you come up with an algorithm that runs in O(n log(n)) time complexity?
+
+====================================================
+Brute Force (Gives TLE)
+====================================================
+
+class Solution {
+public:
+    int maxlen=0;
+
+    int solve(int idx,int prev,vector<int>& nums)
+    {
+        if(idx==nums.size())
+            return 0;
+
+        int nottake=solve(idx+1,prev,nums);
+
+        int take=0;
+        if(prev==-1 || nums[idx]>nums[prev])
+        {
+            take=1+solve(idx+1,idx,nums);
+        }
+
+        return max(take,nottake);
+    }
+
+    int lengthOfLIS(vector<int>& nums) {
+
+        return solve(0,-1,nums);
+    }
+};
+
+====================================================
+Memoization (Top Down DP)
+====================================================
+
+class Solution {
+public:
+    int dp[2501][2501];
+    int maxlen=0;
+
+    int solve(int idx,int prev,vector<int>& nums)
+    {
+        if(idx==nums.size())
+            return 0;
+
+        if(dp[idx][prev+1]!=-1)
+        {
+            return dp[idx][prev+1];
+        }
+
+        int nottake=solve(idx+1,prev,nums);
+
+        int take=0;
+        if(prev==-1 || nums[idx]>nums[prev])
+        {
+            take=1+solve(idx+1,idx,nums);
+        }
+
+        return dp[idx][prev+1]=max(take,nottake);
+    }
+
+    int lengthOfLIS(vector<int>& nums) {
+
+        memset(dp,-1,sizeof(dp));
+
+        return solve(0,-1,nums);
+    }
+};
+
+====================================================
+Time Complexity
+====================================================
+
+Brute Force:
+Time  : O(2^n)
+Space : O(n)
+
+Memoization:
+Time  : O(n^2)
+Space : O(n^2)
+
+====================================================
+*/
