@@ -1,0 +1,85 @@
+/*
+====================================================
+
+343. Integer Break
+
+Given an integer n, break it into the sum of k positive integers, where k >= 2, and maximize the product of those integers.
+
+Return the maximum product you can get.
+
+Example 1:
+
+Input: n = 2
+Output: 1
+
+Explanation:
+2 = 1 + 1
+1 × 1 = 1
+
+Example 2:
+
+Input: n = 10
+Output: 36
+
+Explanation:
+10 = 3 + 3 + 4
+3 × 3 × 4 = 36
+
+Constraints:
+
+2 <= n <= 58
+
+====================================================
+
+Brute Force: Give TLE
+
+class Solution {
+public:
+
+    int integerBreak(int n) {
+
+        if(n==1)
+            return 1;
+
+        int maxi=INT_MIN;
+
+        for(int i=1;i<=n-1;i++)
+        {
+            int prod=i*max(n-i,integerBreak(n-i));
+            maxi=max(prod,maxi);
+        }
+
+        return maxi;
+    }
+};
+
+====================================================
+
+Memoization:
+
+class Solution {
+public:
+    vector<int> dp=vector<int>(59,-1);
+
+    int integerBreak(int n) {
+
+        if(dp[n]!=-1)
+            return dp[n];
+
+        if(n==1)
+            return 1;
+
+        int maxi=INT_MIN;
+
+        for(int i=1;i<=n-1;i++)
+        {
+            int prod=i*max(n-i,integerBreak(n-i));
+            maxi=max(prod,maxi);
+        }
+
+        return dp[n]=maxi;
+    }
+};
+
+====================================================
+*/
