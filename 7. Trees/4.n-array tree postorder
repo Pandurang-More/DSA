@@ -1,5 +1,11 @@
-n array tree is a tree that can have more than 2 children.
+/*
+====================================================================
+                N-ary Tree Postorder Traversal
+====================================================================
 
+Definition:
+-----------
+An N-ary tree is a tree that can have more than 2 children.
 
 /*
 // Definition for a Node.
@@ -21,23 +27,57 @@ public:
 };
 */
 
+====================================================================
+Approach: DFS (Recursive)
+====================================================================
+
+Idea:
+-----
+1. Visit all the children of the current node first.
+2. After visiting every child, add the current node's value.
+3. This follows the Left-to-Right Children → Root order,
+   which is the definition of Postorder traversal.
+
+Time Complexity:
+----------------
+O(N)
+
+Space Complexity:
+-----------------
+O(H)
+(H = Height of the tree due to recursion stack)
+
+====================================================================
+Code
+====================================================================
+
 class Solution {
 public:
 
-    void func( vector<int>&ans,Node* root)
+    void func(vector<int>& ans, Node* root)
     {
-        for(int i=0;i<root->children.size();i++)  // visit first all children abd print
+        // Visit all children first
+        for(int i = 0; i < root->children.size(); i++)
         {
-            func(ans,root->children[i]);
+            func(ans, root->children[i]);
         }
-        ans.push_back(root->val);            // then print the root
-    }
-    vector<int> postorder(Node* root) {
-        vector<int>ans;
-        if(!root)
-        return ans;
-        func(ans,root);
-        return ans;
 
+        // Then visit the current node
+        ans.push_back(root->val);
+    }
+
+    vector<int> postorder(Node* root)
+    {
+        vector<int> ans;
+
+        if(!root)
+            return ans;
+
+        func(ans, root);
+
+        return ans;
     }
 };
+
+====================================================================
+```
