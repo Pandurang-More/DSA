@@ -14,13 +14,13 @@ public:
     int val;
     vector<Node*> children;
 
-    Node() {}
+    Node() {}  // Create a Node with empty
 
     Node(int _val) {
-        val = _val;
+        val = _val;    // Create a Node with value
     }
 
-    Node(int _val, vector<Node*> _children) {
+    Node(int _val, vector<Node*> _children) {        // create a Node with root+children
         val = _val;
         children = _children;
     }
