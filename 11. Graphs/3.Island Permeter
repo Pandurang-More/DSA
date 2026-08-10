@@ -1,40 +1,310 @@
+/*
+====================================================================
+                        Island Perimeter
+====================================================================
+
+Problem:
+--------
+You are given row x col grid representing a map where
+grid[i][j] = 1 represents land and grid[i][j] = 0 represents water.
+
+Grid cells are connected horizontally/vertically (not diagonally).
+
+The grid is completely surrounded by water, and there is exactly one
+island (i.e., one or more connected land cells).
+
+The island doesn't have "lakes", meaning the water inside isn't
+connected to the water around the island.
+
+One cell is a square with side length 1.
+
+The grid is rectangular, width and height don't exceed 100.
+
+Determine the perimeter of the island.
+
+--------------------------------------------------------------------
+Example 1:
+--------------------------------------------------------------------
+
+Input:
+grid = [[0,1,0,0],
+        [1,1,1,0],
+        [0,1,0,0],
+        [1,1,0,0]]
+
+Output:
+16
+
+Explanation:
+The perimeter is the 16 yellow stripes in the image above.
+
+--------------------------------------------------------------------
+Example 2:
+--------------------------------------------------------------------
+
+Input:
+grid = [[1]]
+
+Output:
+4
+
+--------------------------------------------------------------------
+Example 3:
+--------------------------------------------------------------------
+
+Input:
+grid = [[1,0]]
+
+Output:
+4
+
+--------------------------------------------------------------------
+Constraints:
+--------------------------------------------------------------------
+
+row == grid.length
+
+col == grid[i].length
+
+1 <= row, col <= 100
+
+grid[i][j] is 0 or 1.
+
+There is exactly one island in grid.
+
+====================================================================
+Approach 1: DFS
+====================================================================
+
+Idea:
+-----
+For every land cell, explore its four directions.
+
+If a direction goes outside the grid or reaches water,
+that side contributes 1 to the perimeter.
+
+Mark visited land cells as -1 to avoid visiting them again.
+
+Time Complexity:
+----------------
+O(m × n)
+
+Space Complexity:
+-----------------
+O(m × n) in the worst case due to recursion.
+
+====================================================================
+Code
+====================================================================
+
 class Solution {
 public:
-    int m,n;
+    int m, n;
     int peri;
-    void dfs(vector<vector<int>>& grid,int i,int j)
+
+    void dfs(vector<vector<int>>& grid, int i, int j)
     {
-        if(i<0 || i>=m || j<0 || j>=n || grid[i][j]==0)
+        if(i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == 0)
         {
             peri++;
             return;
         }
-        if(grid[i][j]==-1)
-           return;
-        
-        grid[i][j]=-1;
 
-        dfs(grid,i+1,j);
-        dfs(grid,i-1,j);
-        dfs(grid,i,j+1);
-        dfs(grid,i,j-1);
+        if(grid[i][j] == -1)
+            return;
+
+        grid[i][j] = -1;
+
+        dfs(grid, i + 1, j);
+        dfs(grid, i - 1, j);
+        dfs(grid, i, j + 1);
+        dfs(grid, i, j - 1);
     }
-    int islandPerimeter(vector<vector<int>>& grid) {
-         m=grid.size();
-         n=grid[0].size();
-         peri=0;
-        
-        for(int i=0;i<m;i++)
+
+    int islandPerimeter(vector<vector<int>>& grid)
+    {
+        m = grid.size();
+        n = grid[0].size();
+        peri = 0;
+
+        for(int i = 0; i < m; i++)
         {
-            for(int j=0;j<n;j++)
+            for(int j = 0; j < n; j++)
             {
-                if(grid[i][j]==1)
+                if(grid[i][j] == 1)
                 {
-                  dfs(grid,i,j);
-                  return peri;
+                    dfs(grid, i, j);
+                    return peri;
                 }
             }
         }
+
         return -1;
     }
 };
+
+====================================================================
+Approach 2: BFS
+====================================================================
+
+Idea:
+-----
+Start BFS from the first land cell.
+
+For every land cell, check all four directions.
+
+If the neighboring cell is outside the grid or is water,
+increment the perimeter.
+
+If the neighboring cell is unvisited land, add it to the queue
+and mark it as visited.
+
+Time Complexity:
+----------------
+O(m × n)
+
+Space Complexity:
+-----------------
+O(m × n)
+
+====================================================================
+Code
+====================================================================
+
+class Solution {
+public:
+    int m, n;
+
+    vector<vector<int>> dir{
+        {1,0},
+        {-1,0},
+        {0,1},
+        {0,-1}
+    };
+
+    int bfs(vector<vector<int>>& grid, int i, int j)
+    {
+        int peri = 0;
+
+        queue<pair<int,int>> q;
+
+        q.push({i, j});
+        grid[i][j] = -1;
+
+        while(!q.empty())
+        {
+            auto it = q.front();
+            q.pop();
+
+            for(auto &d : dir)
+            {
+                int i_ = d[0] + it.first;
+                int j_ = d[1] + it.second;
+
+                if(i_ < 0 || i_ >= m || j_ < 0 || j_ >= n ||
+                   grid[i_][j_] == 0)
+                {
+                    peri++;
+                }
+                else if(grid[i_][j_] == -1)
+                {
+                    continue;
+                }
+                else
+                {
+                    q.push({i_, j_});
+                    grid[i_][j_] = -1;
+                }
+            }
+        }
+
+        return peri;
+    }
+
+    int islandPerimeter(vector<vector<int>>& grid)
+    {
+        m = grid.size();
+        n = grid[0].size();
+
+        for(int i = 0; i < m; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                if(grid[i][j] == 1)
+                {
+                    return bfs(grid, i, j);
+                }
+            }
+        }
+
+        return -1;
+    }
+};
+
+====================================================================
+Simple Approach
+====================================================================
+
+Idea:
+-----
+No DFS or BFS is required.
+
+For every land cell, check its four sides.
+
+If a side is:
+    • Outside the grid, or
+    • Connected to water
+
+then add 1 to the perimeter.
+
+Time Complexity:
+----------------
+O(m × n)
+
+Space Complexity:
+-----------------
+O(1)
+
+====================================================================
+Code
+====================================================================
+
+class Solution {
+public:
+    int m, n;
+
+    int islandPerimeter(vector<vector<int>>& grid)
+    {
+        m = grid.size();
+        n = grid[0].size();
+
+        int peri = 0;
+
+        for(int i = 0; i < m; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                if(grid[i][j] == 0)
+                {
+                    continue;
+                }
+
+                if(i + 1 >= m || grid[i + 1][j] == 0)
+                    peri++;
+
+                if(i - 1 < 0 || grid[i - 1][j] == 0)
+                    peri++;
+
+                if(j - 1 < 0 || grid[i][j - 1] == 0)
+                    peri++;
+
+                if(j + 1 >= n || grid[i][j + 1] == 0)
+                    peri++;
+            }
+        }
+
+        return peri;
+    }
+};
+
+====================================================================
