@@ -1,67 +1,222 @@
-Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
+/*
+====================================================================
+                        200. Number of Islands
+====================================================================
 
-An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+Problem:
+--------
+Given an m x n 2D binary grid grid which represents a map of '1's
+(land) and '0's (water), return the number of islands.
 
- 
+An island is surrounded by water and is formed by connecting adjacent
+lands horizontally or vertically.
 
+You may assume all four edges of the grid are all surrounded by water.
+
+--------------------------------------------------------------------
 Example 1:
+--------------------------------------------------------------------
 
-Input: grid = [
+Input:
+grid = [
   ["1","1","1","1","0"],
   ["1","1","0","1","0"],
   ["1","1","0","0","0"],
   ["0","0","0","0","0"]
 ]
-Output: 1
-Example 2:
 
-Input: grid = [
+Output:
+1
+
+--------------------------------------------------------------------
+Example 2:
+--------------------------------------------------------------------
+
+Input:
+grid = [
   ["1","1","0","0","0"],
   ["1","1","0","0","0"],
   ["0","0","1","0","0"],
   ["0","0","0","1","1"]
 ]
-Output: 3
- 
 
+Output:
+3
+
+--------------------------------------------------------------------
 Constraints:
+--------------------------------------------------------------------
 
 m == grid.length
+
 n == grid[i].length
+
 1 <= m, n <= 300
+
 grid[i][j] is '0' or '1'.
+
+====================================================================
+Approach 1: DFS
+====================================================================
+
+Idea:
+-----
+Traverse the entire grid.
+
+Whenever we find an unvisited land cell ('1'):
+
+1. Start DFS from that cell.
+2. Visit all horizontally and vertically connected land cells.
+3. Mark visited cells as '0'.
+4. Increment the island count by 1.
+
+Each DFS completely explores one island.
+
+Time Complexity:
+----------------
+O(m × n)
+
+Space Complexity:
+-----------------
+O(m × n) in the worst case due to recursion.
+
+====================================================================
+Code
+====================================================================
 
 class Solution {
 public:
-    int m,n;
-     void dfs(vector<vector<char>>& grid,int i,int j){
-        if(i<0 || j<0 || i>=m || j>=n || grid[i][j]=='0')
-           return ;
-        
-        grid[i][j]='0';
+    int m, n;
 
-        dfs(grid,i+1,j);
-        dfs(grid,i-1,j);
-        dfs(grid,i,j-1);
-        dfs(grid,i,j+1);
-           
-       }
+    void dfs(vector<vector<char>>& grid, int i, int j)
+    {
+        if(i < 0 || j < 0 || i >= m || j >= n ||
+           grid[i][j] == '0')
+            return;
 
-    int numIslands(vector<vector<char>>& grid) {
-        m=grid.size();
-        n=grid[0].size();
-        int islands=0;
-        for(int i=0;i<m;i++)
+        grid[i][j] = '0';
+
+        dfs(grid, i + 1, j);
+        dfs(grid, i - 1, j);
+        dfs(grid, i, j - 1);
+        dfs(grid, i, j + 1);
+    }
+
+    int numIslands(vector<vector<char>>& grid)
+    {
+        m = grid.size();
+        n = grid[0].size();
+
+        int islands = 0;
+
+        for(int i = 0; i < m; i++)
         {
-            for(int j=0;j<n;j++)
+            for(int j = 0; j < n; j++)
             {
-                if(grid[i][j]=='1')
+                if(grid[i][j] == '1')
                 {
-                    dfs(grid,i,j);
+                    dfs(grid, i, j);
                     islands++;
                 }
             }
         }
+
         return islands;
     }
 };
+
+====================================================================
+Approach 2: BFS
+====================================================================
+
+Idea:
+-----
+Whenever we find an unvisited land cell ('1'):
+
+1. Start BFS from that cell.
+2. Use a queue to visit all connected land cells.
+3. Mark every visited land cell as '0'.
+4. Increment the island count by 1.
+
+The four possible directions are:
+
+    {0,1}
+    {0,-1}
+    {1,0}
+    {-1,0}
+
+Time Complexity:
+----------------
+O(m × n)
+
+Space Complexity:
+-----------------
+O(m × n)
+
+====================================================================
+Code
+====================================================================
+
+class Solution {
+public:
+    int m, n;
+
+    vector<vector<int>> dir{
+        {0,1},
+        {0,-1},
+        {1,0},
+        {-1,0}
+    };
+
+    void bfs(vector<vector<char>>& grid, int i, int j)
+    {
+        queue<pair<int, int>> q;
+
+        q.push({i, j});
+        grid[i][j] = '0';
+
+        while(!q.empty())
+        {
+            auto it = q.front();
+            q.pop();
+
+            for(auto &d : dir)
+            {
+                int i_ = d[0] + it.first;
+                int j_ = d[1] + it.second;
+
+                if(i_ < 0 || j_ < 0 || i_ >= m || j_ >= n ||
+                   grid[i_][j_] == '0')
+                    continue;
+
+                q.push({i_, j_});
+                grid[i_][j_] = '0';
+            }
+        }
+    }
+
+    int numIslands(vector<vector<char>>& grid)
+    {
+        m = grid.size();
+        n = grid[0].size();
+
+        int islands = 0;
+
+        for(int i = 0; i < m; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                if(grid[i][j] == '1')
+                {
+                    bfs(grid, i, j);
+                    islands++;
+                }
+            }
+        }
+
+        return islands;
+    }
+};
+
+====================================================================
+```
