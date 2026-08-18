@@ -1,49 +1,126 @@
-For example, in the given tree above, the leaf value sequence is (6, 7, 4, 9, 8).
+/*
+====================================================================
+                    Leaf-Similar Trees
+====================================================================
 
-Two binary trees are considered leaf-similar if their leaf value sequence is the same.
+Problem:
+--------
+Consider all the leaves of a binary tree, from left to right order,
+the values of those leaves form a leaf value sequence.
 
-Return true if and only if the two given trees with head nodes root1 and root2 are leaf-similar.
+For example, in the given tree above, the leaf value sequence is
+(6, 7, 4, 9, 8).
 
- 
-inplace not possible 
+Two binary trees are considered leaf-similar if their leaf value
+sequence is the same.
 
+Return true if and only if the two given trees with head nodes root1
+and root2 are leaf-similar.
 
+--------------------------------------------------------------------
+Example 1:
+--------------------------------------------------------------------
 
+Input:
+root1 = [3,5,1,6,2,9,8,null,null,7,4]
+
+root2 = [3,5,1,6,7,4,2,null,null,null,null,null,null,9,8]
+
+Output:
+true
+
+--------------------------------------------------------------------
+Example 2:
+--------------------------------------------------------------------
+
+Input:
+root1 = [1,2,3]
+
+root2 = [1,3,2]
+
+Output:
+false
+
+--------------------------------------------------------------------
+Constraints:
+--------------------------------------------------------------------
+
+The number of nodes in each tree will be in the range [1, 200].
+
+Both of the given trees will have values in the range [0, 200].
+
+====================================================================
+Approach: DFS + Vector
+====================================================================
+
+Idea:
+-----
+1. Traverse both trees using DFS.
+2. Whenever a leaf node is found, store its value in the vector.
+3. DFS visits the left subtree before the right subtree, so the leaf
+   values are stored from left to right.
+4. Compare the two vectors.
+
+In-place is not possible because we need to preserve and compare the
+leaf value sequences of both trees.
+
+Time Complexity:
+----------------
+O(N + M)
+
+N = Number of nodes in root1
+M = Number of nodes in root2
+
+Space Complexity:
+-----------------
+O(N + M)
+
+For storing the leaf sequences.
+
+====================================================================
+Code
+====================================================================
 
 class Solution {
 public:
-   void getleaves(TreeNode* root,vector<int>&leaves)
-   {
-    if(root==NULL)return;
 
-    if(root->left==NULL && root->right==NULL)
+    void getleaves(TreeNode* root, vector<int>& leaves)
     {
-        leaves.push_back(root->val);
+        if(root == NULL)
+            return;
+
+        if(root->left == NULL && root->right == NULL)
+        {
+            leaves.push_back(root->val);
+        }
+
+        getleaves(root->left, leaves);
+        getleaves(root->right, leaves);
     }
 
-    getleaves( root->left,leaves);
-    getleaves(root->right,leaves);
-    
-   }
-
-
-
-    bool leafSimilar(TreeNode* root1, TreeNode* root2) 
+    bool leafSimilar(TreeNode* root1, TreeNode* root2)
     {
-       vector<int>l1,l2;
-       getleaves(root1,l1);
-       getleaves(root2,l2);
+        vector<int> l1, l2;
 
-       return l1==l2;                                   //Internally, this line means:
+        getleaves(root1, l1);
+        getleaves(root2, l2);
 
-                                                         Check if both vectors have the same size.
+        return l1 == l2;
 
-                                                          If sizes differ → immediately return false.
+        /*
+        Internally, this line means:
 
-                                                         If sizes are equal → compare each element one by one:
+        Check if both vectors have the same size.
 
-                                                          If any pair of elements differ → return false.
+        If sizes differ -> immediately return false.
 
-                                                          If all elements match → return true.
- }
+        If sizes are equal -> compare each element one by one.
+
+        If any pair of elements differ -> return false.
+
+        If all elements match -> return true.
+        */
+    }
 };
+
+====================================================================
