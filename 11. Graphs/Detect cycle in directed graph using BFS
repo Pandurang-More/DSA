@@ -1,0 +1,111 @@
+/* 
+==================================================================== 
+                    Detect Cycle in Directed Graph
+                    BFS (Kahn's Algorithm)
+==================================================================== 
+ 
+Problem:
+--------
+Given a directed graph with N vertices, check whether the graph 
+contains a cycle.
+
+-------------------------------------------------------------------- 
+Approach: BFS (Kahn's Algorithm)
+-------------------------------------------------------------------- 
+ 
+Idea:
+-----
+In Kahn's Algorithm:
+
+1. Calculate the indegree of every vertex.
+2. Push all vertices with indegree 0 into the queue.
+3. Process the vertices using BFS.
+4. Every processed vertex increases the count.
+5. If all N vertices are processed, there is no cycle.
+6. If count is less than N, some vertices are part of a cycle.
+
+Why?
+
+Vertices inside a cycle always depend on each other, so their 
+indegree can never become 0.
+
+-------------------------------------------------------------------- 
+Time Complexity:
+-------------------------------------------------------------------- 
+ 
+O(V + E)
+ 
+-------------------------------------------------------------------- 
+Space Complexity:
+-------------------------------------------------------------------- 
+ 
+O(V + E)
+ 
+==================================================================== 
+Code
+==================================================================== 
+*/
+
+class Solution {
+  public:
+    
+    bool isCyclic(int N, vector<vector<int>> &edges) {
+        
+        vector<vector<int>> adj(N);
+        
+        // Create adjacency list
+        for(auto edge : edges)
+        {
+            int u = edge[0];
+            int v = edge[1];
+            
+            adj[u].push_back(v);
+        }
+        
+        // Calculate indegree
+        vector<int> indegree(N, 0);
+        
+        for(int u = 0; u < N; u++)
+        {
+            for(int &v : adj[u])
+            {
+                indegree[v]++;
+            }
+        }
+        
+        queue<int> q;
+        
+        // Push all nodes with indegree 0
+        for(int i = 0; i < N; i++)
+        {
+            if(indegree[i] == 0)
+            {
+                q.push(i);
+            }
+        }
+        
+        int count = 0;
+        
+        while(!q.empty())
+        {
+            int u = q.front();
+            q.pop();
+            
+            // Count processed node
+            count++;
+            
+            for(int &v : adj[u])
+            {
+                indegree[v]--;
+                
+                if(indegree[v] == 0)
+                {
+                    q.push(v);
+                }
+            }
+        }
+        
+        // If all nodes are processed, no cycle exists
+        return count != N;
+    }
+};
