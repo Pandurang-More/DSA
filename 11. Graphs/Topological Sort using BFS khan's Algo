@@ -1,0 +1,104 @@
+/* 
+==================================================================== 
+                         Topological Sort (BFS)
+                         Kahn's Algorithm
+==================================================================== 
+ 
+Problem: 
+-------- 
+Given a Directed Acyclic Graph (DAG), return a topological ordering 
+of all vertices.
+
+For every directed edge:
+
+u -> v
+
+Vertex u must appear before vertex v.
+
+-------------------------------------------------------------------- 
+Approach: BFS (Kahn's Algorithm)
+-------------------------------------------------------------------- 
+ 
+Idea:
+-----
+1. Create an adjacency list.
+2. Calculate the indegree of every vertex.
+3. Push all vertices with indegree 0 into a queue.
+4. Remove a vertex from the queue and add it to the result.
+5. Decrease the indegree of all its neighbors.
+6. If any neighbor's indegree becomes 0, push it into the queue.
+7. Continue until the queue becomes empty.
+
+A node with indegree 0 has no dependency, so it can be placed first.
+
+-------------------------------------------------------------------- 
+Time Complexity:
+-------------------------------------------------------------------- 
+ 
+O(V + E)
+ 
+-------------------------------------------------------------------- 
+Space Complexity:
+-------------------------------------------------------------------- 
+ 
+O(V + E)
+ 
+==================================================================== 
+Code
+==================================================================== 
+*/
+
+class Solution {
+  public:
+    
+    vector<int> topoSort(int N, vector<vector<int>>& edges) {
+        
+        vector<vector<int>> adj(N);
+        
+        for(auto edge : edges)
+        {
+            int u = edge[0];
+            int v = edge[1];
+            
+            adj[u].push_back(v);
+        }
+        
+        vector<int> indegree(N, 0);
+        
+        for(int u = 0; u < N; u++)
+        {
+            for(int &v : adj[u])
+            {
+                indegree[v]++;
+            }
+        }
+        
+        queue<int> q;
+        
+        for(int i = 0; i < N; i++)
+        {
+            if(indegree[i] == 0)
+                q.push(i);
+        }
+        
+        vector<int> result;
+        
+        while(!q.empty())
+        {
+            int u = q.front();
+            q.pop();
+            
+            result.push_back(u);
+            
+            for(int &v : adj[u])
+            {
+                indegree[v]--;
+                
+                if(indegree[v] == 0)
+                    q.push(v);
+            }
+        }
+        
+        return result;
+    }
+};
