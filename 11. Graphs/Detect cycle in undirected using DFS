@@ -1,0 +1,152 @@
+/*
+====================================================================
+        Detect Cycle in an Undirected Graph Using DFS
+====================================================================
+
+Problem:
+--------
+Given an undirected graph with V vertices and E edges, determine
+whether the graph contains a cycle or not.
+
+The graph can have multiple components.
+
+--------------------------------------------------------------------
+Example 1:
+--------------------------------------------------------------------
+
+Input:
+V = 4
+
+edges = [[0,1],[0,2],[1,2],[2,3]]
+
+Output:
+true
+
+Explanation:
+
+The graph contains a cycle:
+
+0 -> 1 -> 2 -> 0
+
+--------------------------------------------------------------------
+Example 2:
+--------------------------------------------------------------------
+
+Input:
+V = 4
+
+edges = [[0,1],[1,2],[2,3]]
+
+Output:
+false
+
+Explanation:
+
+The graph does not contain any cycle.
+
+====================================================================
+Approach: DFS + Parent Tracking
+====================================================================
+
+Idea:
+-----
+
+Use DFS to traverse the graph.
+
+Maintain:
+
+1. visited[]:
+   Keeps track of visited nodes.
+
+2. parent:
+   Keeps track of the node from which we reached the
+   current node.
+
+For every neighbor v of the current node u:
+
+1. If v is the parent, ignore it.
+
+2. If v is already visited and is not the parent,
+   a cycle exists.
+
+3. Otherwise, perform DFS on v.
+
+Since the graph can have multiple components, start DFS
+from every unvisited node.
+
+Time Complexity:
+----------------
+
+O(V + E)
+
+Space Complexity:
+-----------------
+
+O(V + E)
+
+====================================================================
+Code
+====================================================================
+*/
+
+class Solution {
+public:
+
+    bool iscycledfs(vector<vector<int>>& adj,
+                    int u,
+                    vector<bool>& visited,
+                    int parent)
+    {
+        visited[u] = true;
+
+        for(int &v : adj[u])
+        {
+            // Ignore the parent node
+            if(v == parent)
+                continue;
+
+            // Already visited through another path
+            // Cycle exists
+            if(visited[v])
+                return true;
+
+            // Visit the unvisited neighbor
+            if(iscycledfs(adj, v, visited, u))
+                return true;
+        }
+
+        return false;
+    }
+
+
+    bool isCycle(int V, vector<vector<int>>& edges)
+    {
+        vector<bool> visited(V, false);
+
+        // Create adjacency list
+        vector<vector<int>> adj(V);
+
+        for(auto edge : edges)
+        {
+            int u = edge[0];
+            int v = edge[1];
+
+            // Undirected graph
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+
+
+        // Check every component
+        for(int i = 0; i < V; i++)
+        {
+            if(!visited[i] &&
+               iscycledfs(adj, i, visited, -1))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+};
