@@ -1,0 +1,173 @@
+/*
+====================================================================
+        Detect Cycle in an Undirected Graph Using BFS
+====================================================================
+
+Problem:
+--------
+Given an undirected graph with V vertices and E edges, determine
+whether the graph contains a cycle or not.
+
+The graph can have multiple components.
+
+--------------------------------------------------------------------
+Example 1:
+--------------------------------------------------------------------
+
+Input:
+V = 4
+
+edges = [[0,1],[0,2],[1,2],[2,3]]
+
+Output:
+true
+
+Explanation:
+
+The graph contains a cycle:
+
+0 -> 1 -> 2 -> 0
+
+--------------------------------------------------------------------
+Example 2:
+--------------------------------------------------------------------
+
+Input:
+V = 4
+
+edges = [[0,1],[1,2],[2,3]]
+
+Output:
+false
+
+Explanation:
+
+The graph does not contain any cycle.
+
+====================================================================
+Approach: BFS + Parent Tracking
+====================================================================
+
+Idea:
+-----
+
+Use BFS to traverse the graph.
+
+Store:
+
+    {current node, parent node}
+
+inside the queue.
+
+For every neighbor v of the current node:
+
+1. If v is not visited:
+   
+   - Mark it as visited.
+   - Push {v, current node} into the queue.
+
+2. If v is already visited and v is not the parent:
+
+   - A cycle exists.
+
+Since the graph can have multiple components, start BFS
+from every unvisited node.
+
+Time Complexity:
+----------------
+
+O(V + E)
+
+Space Complexity:
+-----------------
+
+O(V + E)
+
+====================================================================
+Code
+====================================================================
+*/
+
+class Solution {
+public:
+
+    bool iscyclebfs(vector<vector<int>>& adj,
+                    int u,
+                    vector<bool>& visited)
+    {
+        queue<pair<int,int>> q;
+
+        // {current node, parent}
+        q.push({u, -1});
+
+        visited[u] = true;
+
+
+        while(!q.empty())
+        {
+            pair<int,int> p = q.front();
+
+            q.pop();
+
+            int source = p.first;
+            int parent = p.second;
+
+
+            for(int &v : adj[source])
+            {
+                // If neighbor is not visited
+                if(visited[v] == false)
+                {
+                    visited[v] = true;
+
+                    // Current source becomes parent of v
+                    q.push({v, source});
+                }
+
+                // If neighbor is already visited
+                // and it is not the parent,
+                // then cycle exists
+                else if(v != parent)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+
+    bool isCycle(int V, vector<vector<int>>& edges)
+    {
+        vector<bool> visited(V, false);
+
+        // Create adjacency list
+        vector<vector<int>> adj(V);
+
+
+        // Convert edges into adjacency list
+        for(auto edge : edges)
+        {
+            int u = edge[0];
+            int v = edge[1];
+
+            // Undirected graph
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+
+
+        // Check every component
+        for(int i = 0; i < V; i++)
+        {
+            if(!visited[i] &&
+               iscyclebfs(adj, i, visited))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+};
