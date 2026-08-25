@@ -15,30 +15,23 @@ You must complete course b before taking course a.
 
 Return true if it is possible to finish all courses.
 
--------------------------------------------------------------------- 
-Approach: DFS Cycle Detection
--------------------------------------------------------------------- 
+==================================================================== 
+Approach 1: DFS Cycle Detection
+==================================================================== 
  
 Idea:
 -----
 To finish all courses, the prerequisite graph must not contain a cycle.
 
-Example of a cycle:
-
-0 -> 1 -> 2 -> 0
-
-If a cycle exists, the courses depend on each other and cannot be
-completed.
-
 We use:
 
 1. visited
-   - Stores nodes that have already been visited.
+   - Stores courses that have already been visited.
 
 2. inrec
-   - Stores nodes currently present in the DFS recursion path.
+   - Stores courses currently present in the DFS recursion path.
 
-If we reach a node that is already in the current recursion path,
+If we reach a course that is already present in the current DFS path,
 then a cycle exists.
 
 -------------------------------------------------------------------- 
@@ -73,16 +66,19 @@ public:
 
         for(int &v : adj[u])
         {
-            // Visit unvisited neighbor
-            if(!visited[v] && dfscycle(v, adj, visited, inrec))
+            if(!visited[v] && 
+               dfscycle(v, adj, visited, inrec))
+            {
                 return true;
+            }
 
-            // Node already exists in current DFS path
             else if(inrec[v] == true)
+            {
                 return true;
+            }
         }
 
-        // Remove node from current recursion path
+        // Remove current node from recursion path
         inrec[u] = false;
 
         return false;
@@ -102,14 +98,14 @@ public:
             int b = v[1];
 
             // b must be completed before a
-            b -> a
+            // b -> a
             adj[b].push_back(a);
         }
 
         vector<bool> visited(numCourses, false);
         vector<bool> inrec(numCourses, false);
 
-        // Check all components
+        // Check every course
         for(int i = 0; i < numCourses; i++)
         {
             if(!visited[i] &&
@@ -120,5 +116,137 @@ public:
         }
 
         return true;
+    }
+};
+
+
+
+/* 
+==================================================================== 
+                         Course Schedule
+==================================================================== 
+ 
+Problem:
+--------
+There are numCourses courses numbered from 0 to numCourses - 1.
+
+prerequisites[i] = [a, b] means:
+
+b -> a
+
+You must complete course b before taking course a.
+
+Return true if it is possible to finish all courses.
+
+-------------------------------------------------------------------- 
+Approach: BFS (Kahn's Algorithm)
+-------------------------------------------------------------------- 
+ 
+Idea:
+-----
+To finish all courses, the prerequisite graph must not contain a cycle.
+
+We use:
+
+1. Adjacency List
+   - adj[b].push_back(a)
+   - Course b must be completed before course a.
+
+2. Indegree
+   - indegree[a] stores the number of prerequisites of course a.
+
+3. Queue
+   - Push all courses with indegree 0.
+   - These courses have no prerequisites.
+
+4. BFS
+   - Remove a course from the queue.
+   - Mark it as completed.
+   - Decrease the indegree of its neighbors.
+   - If a neighbor's indegree becomes 0, push it into the queue.
+
+5. Count
+   - Count how many courses are completed.
+   - If count == numCourses, all courses can be completed.
+   - Otherwise, a cycle exists.
+
+-------------------------------------------------------------------- 
+Time Complexity:
+-------------------------------------------------------------------- 
+ 
+O(V + E)
+ 
+-------------------------------------------------------------------- 
+Space Complexity:
+-------------------------------------------------------------------- 
+ 
+O(V + E)
+ 
+==================================================================== 
+Code
+==================================================================== 
+*/
+
+class Solution {
+public:
+   
+    bool canFinish(
+        int numCourses,
+        vector<vector<int>>& prerequisites
+    ) {
+        
+        vector<vector<int>> adj(numCourses);
+        vector<int> indegree(numCourses, 0);
+
+        // Create adjacency list
+        for(auto &v : prerequisites)
+        {
+            int a = v[0];
+            int b = v[1];
+
+            // b must be completed before a
+            adj[b].push_back(a);
+        }
+
+        // Calculate indegree
+        for(int u = 0; u < numCourses; u++)
+        {
+            for(int &v : adj[u])
+            {
+                indegree[v]++;
+            }
+        }
+
+        queue<int> q;
+
+        // Push courses with no prerequisites
+        for(int i = 0; i < numCourses; i++)
+        {
+            if(indegree[i] == 0)
+                q.push(i);
+        }
+
+        int count = 0;
+
+        while(!q.empty())
+        {
+            int u = q.front();
+            q.pop();
+
+            // Course is completed
+            count++;
+
+            for(int &v : adj[u])
+            {
+                indegree[v]--;
+
+                // All prerequisites completed
+                if(indegree[v] == 0)
+                    q.push(v);
+            }
+        }
+
+        // If all courses are completed, no cycle exists
+        return count == numCourses;
     }
 };
