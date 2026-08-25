@@ -1,0 +1,124 @@
+/* 
+==================================================================== 
+                         Course Schedule
+==================================================================== 
+ 
+Problem:
+--------
+There are numCourses courses numbered from 0 to numCourses - 1.
+
+prerequisites[i] = [a, b] means:
+
+b -> a
+
+You must complete course b before taking course a.
+
+Return true if it is possible to finish all courses.
+
+-------------------------------------------------------------------- 
+Approach: DFS Cycle Detection
+-------------------------------------------------------------------- 
+ 
+Idea:
+-----
+To finish all courses, the prerequisite graph must not contain a cycle.
+
+Example of a cycle:
+
+0 -> 1 -> 2 -> 0
+
+If a cycle exists, the courses depend on each other and cannot be
+completed.
+
+We use:
+
+1. visited
+   - Stores nodes that have already been visited.
+
+2. inrec
+   - Stores nodes currently present in the DFS recursion path.
+
+If we reach a node that is already in the current recursion path,
+then a cycle exists.
+
+-------------------------------------------------------------------- 
+Time Complexity:
+-------------------------------------------------------------------- 
+ 
+O(V + E)
+ 
+-------------------------------------------------------------------- 
+Space Complexity:
+-------------------------------------------------------------------- 
+ 
+O(V + E)
+ 
+==================================================================== 
+Code
+==================================================================== 
+*/
+
+class Solution {
+public:
+
+    bool dfscycle(
+        int u,
+        vector<vector<int>>& adj,
+        vector<bool>& visited,
+        vector<bool>& inrec
+    )
+    {
+        visited[u] = true;
+        inrec[u] = true;
+
+        for(int &v : adj[u])
+        {
+            // Visit unvisited neighbor
+            if(!visited[v] && dfscycle(v, adj, visited, inrec))
+                return true;
+
+            // Node already exists in current DFS path
+            else if(inrec[v] == true)
+                return true;
+        }
+
+        // Remove node from current recursion path
+        inrec[u] = false;
+
+        return false;
+    }
+
+    bool canFinish(
+        int numCourses,
+        vector<vector<int>>& prerequisites
+    ) 
+    {
+        vector<vector<int>> adj(numCourses);
+
+        // Create graph
+        for(auto &v : prerequisites)
+        {
+            int a = v[0];
+            int b = v[1];
+
+            // b must be completed before a
+            b -> a
+            adj[b].push_back(a);
+        }
+
+        vector<bool> visited(numCourses, false);
+        vector<bool> inrec(numCourses, false);
+
+        // Check all components
+        for(int i = 0; i < numCourses; i++)
+        {
+            if(!visited[i] &&
+               dfscycle(i, adj, visited, inrec))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+};
