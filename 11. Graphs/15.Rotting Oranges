@@ -1,0 +1,130 @@
+/* 
+==================================================================== 
+                         Rotting Oranges
+==================================================================== 
+ 
+Problem:
+--------
+You are given an m x n grid where:
+
+0 -> Empty cell
+1 -> Fresh orange
+2 -> Rotten orange
+
+Every minute, any fresh orange that is 4-directionally adjacent to a
+rotten orange becomes rotten.
+
+Return the minimum number of minutes until no fresh orange remains.
+If impossible, return -1.
+
+-------------------------------------------------------------------- 
+Approach: BFS (Breadth First Search)
+-------------------------------------------------------------------- 
+ 
+Idea:
+-----
+Use BFS because oranges rot level by level, where each BFS level
+represents one minute.
+
+1. Put all initially rotten oranges into the queue.
+2. Count the total number of fresh oranges.
+3. Process all rotten oranges of the current minute.
+4. Rot their fresh 4-directional neighbors and push them into queue.
+5. Decrease freshcount whenever an orange becomes rotten.
+6. Continue until the queue becomes empty.
+7. If freshcount becomes 0, return the elapsed minutes.
+8. Otherwise, return -1.
+
+-------------------------------------------------------------------- 
+Time Complexity:
+-------------------------------------------------------------------- 
+ 
+O(m * n)
+
+-------------------------------------------------------------------- 
+Space Complexity:
+-------------------------------------------------------------------- 
+ 
+O(m * n)
+
+==================================================================== 
+Code
+==================================================================== 
+*/
+
+class Solution {
+public:
+    vector<vector<int>> directories{
+        {-1,0},
+        {1,0},
+        {0,1},
+        {0,-1}
+    };
+
+    int orangesRotting(vector<vector<int>>& grid)
+    {
+        int m = grid.size();
+        int n = grid[0].size();
+
+        int freshcount = 0;
+
+        queue<pair<int,int>> q;
+
+        for(int i = 0; i < m; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                if(grid[i][j] == 2)
+                {
+                    q.push({i,j});
+                }
+                else if(grid[i][j] == 1)
+                {
+                    freshcount++;
+                }
+            }
+        }
+
+        if(freshcount == 0)
+        {
+            return 0;
+        }
+
+        int minutes = 0;
+
+        while(!q.empty())
+        {
+            int N = q.size();
+
+            while(N--)
+            {
+                auto curr = q.front();
+                q.pop();
+
+                int i = curr.first;
+                int j = curr.second;
+
+                for(auto dir : directories)
+                {
+                    int new_i = i + dir[0];
+                    int new_j = j + dir[1];
+
+                    if(new_i >= 0 && new_i < m &&
+                       new_j >= 0 && new_j < n &&
+                       grid[new_i][new_j] == 1)
+                    {
+                        grid[new_i][new_j] = 2;
+
+                        q.push({new_i,new_j});
+
+                        freshcount--;
+                    }
+                }
+            }
+
+            minutes++;
+        }
+
+        return freshcount == 0 ? minutes - 1 : -1;
+    }
+};
