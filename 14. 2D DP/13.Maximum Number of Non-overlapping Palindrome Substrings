@@ -134,3 +134,131 @@ public:
         return solve(s, k, 0, k - 1, t);
     }
 };
+
+
+
+
+
+/*
+====================================================================
+                Maximum Number of Palindromes
+====================================================================
+
+Problem:
+--------
+Given a string s and a positive integer k, select a set of
+non-overlapping substrings such that:
+
+1. The length of each substring is at least k.
+2. Each substring is a palindrome.
+
+Return the maximum number of substrings in an optimal selection.
+
+--------------------------------------------------------------------
+Example 1:
+--------------------------------------------------------------------
+
+Input:
+s = "abaccdbbd"
+k = 3
+
+Output:
+2
+
+Explanation:
+
+We can select "aba" and "dbbd".
+
+--------------------------------------------------------------------
+Example 2:
+--------------------------------------------------------------------
+
+Input:
+s = "adbcda"
+k = 2
+
+Output:
+0
+
+Explanation:
+
+There is no palindrome substring of length at least 2.
+
+====================================================================
+Approach: Bottom-Up DP
+====================================================================
+
+Idea:
+-----
+Check every possible substring.
+
+1. Check whether the current substring is a palindrome.
+2. If it is a palindrome:
+   - Take it.
+   - Grow the current substring.
+   - Slide the starting position.
+3. Store the result in the DP table.
+4. Fill the table from bottom to top.
+
+--------------------------------------------------------------------
+Code
+====================================================================
+*/
+
+class Solution {
+public: 
+
+    int n;
+
+    bool pallindrome(string &s, int i, int j)
+    {
+        while(i < j)
+        {
+            if(s[i] != s[j])
+                return false;
+
+            i++;
+            j--;
+        }
+
+        return true;
+    }
+
+    int maxPalindromes(string s, int k)
+    {
+        n = s.size();
+
+        if(k == 1)
+            return n;
+
+        vector<vector<int>> t(
+            n + 1,
+            vector<int>(n + 1)
+        );
+
+        for(int i = n - 1; i >= 0; i--)
+        {
+            for(int j = n - 1; j >= 0; j--)
+            {
+                if(pallindrome(s, i, j))
+                {
+                    int take = 1 + (j + k <= n ? t[j + 1][j + k] : 0);
+
+                    int grow = t[i][j + 1];
+
+                    int slide = t[i + 1][j + 1];
+
+                    t[i][j] = max({take, grow, slide});
+                }
+
+                int grow = t[i][j + 1];
+
+                int slide = t[i + 1][j + 1];
+
+                t[i][j] = max({t[i][j], grow, slide});
+            }
+        }
+
+        return t[0][k - 1];
+    }
+};
